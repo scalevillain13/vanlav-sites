@@ -17,6 +17,8 @@ type RawSite = {
   description: string; tagline: string; price: number;
   /** Скриншот сайта (путь из /public). Если пусто — рисуется макет из preview */
   image: string;
+  /** Обложка для карточек каталога и 3D-витрины (необязательно, иначе берётся image) */
+  cover?: string;
   /** Ссылка на живой сайт. Если пусто — открывается встроенное демо */
   demoUrl: string;
   domain: string;
@@ -87,14 +89,16 @@ export type Plan = (typeof PLANS)[number];
 export const CATEGORIES = ['Все', 'Строительство', 'Авто', 'Услуги', 'Красота', 'Недвижимость', 'Другое'];
 
 // Шаблоны. Чтобы добавить новый — скопируйте объект и поменяйте поля.
-// Когда шаблон станет живым сайтом: положите скриншот в /public/sites и заполните image + demoUrl + domain.
+// Когда шаблон станет живым сайтом: положите скриншоты в /public/sites/<id>/ и заполните image (+ cover) + demoUrl + domain.
+// image — длинная склейка экранов сайта шириной 1280px (крутится на ноутбуке и показывается на странице шаблона),
+// cover — один первый экран для карточек.
 const RAW_SITES: RawSite[] = [
   // Живой сайт — https://napor-landing.vercel.app/
   {
     id: 'napor', title: 'НАПОР', niche: 'Сантехника', group: 'Услуги',
     description: 'Сайт аварийной сантехнической службы: 3D-план квартиры, прайс-диапазоны и вызов мастера за 40 минут.',
     tagline: 'Готовый сайт для сантехнической службы',
-    price: PRICES.ready.from, image: '/sites/napor.jpg', demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
+    price: PRICES.ready.from, image: '/sites/napor/full.jpg', cover: '/sites/napor/cover.jpg', demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
     preview: {
       variant: 'split', bg: '#F3F3EF', ink: '#14171A', muted: '#4B5058', accent: '#F05A22', accentInk: '#FFFFFF',
       panel: '#14171A', panelInk: '#FFFFFF', surface: '#FFFFFF', line: '#DDDDD6',

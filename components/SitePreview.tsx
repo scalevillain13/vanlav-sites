@@ -9,14 +9,14 @@ const dark = (hex?: string) => {
 };
 
 /** Макет сайта-шаблона (или скриншот, если задан site.image). Масштабируется по ширине контейнера (cqw). */
-export default function SitePreview({ site, eager = false }: { site: Site; eager?: boolean }) {
+export default function SitePreview({ site, eager = false, thumb = false }: { site: Site; eager?: boolean; thumb?: boolean }) {
   const p = { panel: '#111214', panelInk: '#FFFFFF', ...site.preview };
 
   if (site.image) {
     return (
       <div style={{ width: '100%', background: p.bg, overflow: 'hidden' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={site.image} alt={site.title} loading={eager ? 'eager' : 'lazy'} decoding="async" style={{ display: 'block', width: '100%', height: 'auto' }} />
+        <img src={(thumb && site.cover) || site.image} alt={site.title} loading={eager ? 'eager' : 'lazy'} decoding="async" style={{ display: 'block', width: '100%', height: 'auto' }} />
       </div>
     );
   }

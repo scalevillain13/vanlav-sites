@@ -12,7 +12,7 @@ export default function SiteCard({ site }: { site: Site }) {
           {site.live && <span className="live-dot">Живой сайт</span>}
         </div>
         <div className="shot">
-          <div className="scroll"><SitePreview site={site} /></div>
+          <div className="scroll"><SitePreview site={site} thumb /></div>
           <span className="open-pill">Открыть шаблон <i>→</i></span>
         </div>
       </div>
