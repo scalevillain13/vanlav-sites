@@ -16,7 +16,7 @@ export default function Hero() {
           <span>Сайты с нуля на заказ · {count} готовых решений</span>
         </div>
         <h1 className="h1">
-          <span className="line"><span>Разработка сайтов для бизнеса.</span></span>
+          <span className="line"><span>Разработка сайтов для бизнеса.</span></span>{' '}
           <span className="line"><span>С нуля или на готовой основе.</span></span>
         </h1>
 

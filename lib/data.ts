@@ -19,6 +19,9 @@ type RawSite = {
   image: string;
   /** Обложка для карточек каталога и 3D-витрины (необязательно, иначе берётся image) */
   cover?: string;
+  /** высота скриншотов в px при ширине 1280 (для оптимизации картинок) */
+  imageH?: number;
+  coverH?: number;
   /** Ссылка на живой сайт. Если пусто — открывается встроенное демо */
   demoUrl: string;
   domain: string;
@@ -98,7 +101,7 @@ const RAW_SITES: RawSite[] = [
     id: 'napor', title: 'НАПОР', niche: 'Сантехника', group: 'Услуги',
     description: 'Сайт аварийной сантехнической службы: 3D-план квартиры, прайс-диапазоны и вызов мастера за 40 минут.',
     tagline: 'Готовый сайт для сантехнической службы',
-    price: PRICES.ready.from, image: '/sites/napor/full.jpg', cover: '/sites/napor/cover.jpg', demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
+    price: PRICES.ready.from, image: '/sites/napor/full.jpg', imageH: 6508, cover: '/sites/napor/cover.jpg', coverH: 700, demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
     preview: {
       variant: 'split', bg: '#F3F3EF', ink: '#14171A', muted: '#4B5058', accent: '#F05A22', accentInk: '#FFFFFF',
       panel: '#14171A', panelInk: '#FFFFFF', surface: '#FFFFFF', line: '#DDDDD6',
@@ -116,7 +119,7 @@ const RAW_SITES: RawSite[] = [
     id: 'briz', title: 'Бриз', niche: 'Клининговые услуги', group: 'Услуги',
     description: 'Сайт клининговой компании: виды уборки с ценами, до/после, команда, отзывы и заявка в один клик.',
     tagline: 'Готовый сайт для клининговой компании',
-    price: PRICES.ready.from, image: '/sites/briz/full.jpg', cover: '/sites/briz/cover.jpg', demoUrl: 'https://briz-inky.vercel.app/', domain: 'briz-inky.vercel.app',
+    price: PRICES.ready.from, image: '/sites/briz/full.jpg', imageH: 6289, cover: '/sites/briz/cover.jpg', coverH: 702, demoUrl: 'https://briz-inky.vercel.app/', domain: 'briz-inky.vercel.app',
     preview: {
       variant: 'stack', bg: '#F5F4EE', ink: '#13302A', muted: '#4A5A55', accent: '#D9F26B', accentInk: '#13302A',
       heroBg: '#F5F4EE', heroInk: '#13302A', heroMuted: '#4A5A55', heroLine: '#DDDCD4', surface: '#FFFFFF', line: '#DDDCD4',

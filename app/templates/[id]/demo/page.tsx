@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import SitePreview from '@/components/SitePreview';
+import Logo from '@/components/Logo';
 import { SITES, findSite } from '@/lib/data';
 
 export const dynamicParams = false;
@@ -14,7 +15,7 @@ type Params = { params: Promise<{ id: string }> };
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { id } = await params;
   const site = findSite(id);
-  return site ? { title: `Демо · ${site.title} — Ванлав Сайты`, robots: { index: false } } : {};
+  return site ? { title: `Демо · ${site.title}`, robots: { index: false } } : {};
 }
 
 export default async function DemoPage({ params }: Params) {
@@ -25,7 +26,7 @@ export default async function DemoPage({ params }: Params) {
   return (
     <div className="demo-page">
       <div className="demo-bar">
-        <Link href={site.url}>← <b>Ванлав <span>Сайты</span></b></Link>
+        <Link href={site.url} className="logo">← <Logo /></Link>
         <span className="mid">Демо · {site.title}</span>
         <Link href={site.url + '#order'} className="order">Заказать</Link>
       </div>

@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   if (!name || !contact) return NextResponse.json({ ok: false, reason: 'invalid' }, { status: 400 });
 
   const text = [
-    '🟠 Новая заявка — Ванлав Сайты',
+    '🟠 Новая заявка — студия Ванлав',
     clean(body.template, 100) && 'Шаблон: ' + clean(body.template, 100),
     'Имя: ' + name,
     'Контакт: ' + contact,

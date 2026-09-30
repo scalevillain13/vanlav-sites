@@ -1,5 +1,7 @@
 import { SERVICES, SITES } from '@/lib/data';
+import Link from 'next/link';
 import Devices3D from './Devices3D';
+import { servicePageById } from '@/lib/services-content';
 
 const ICONS: Record<string, string> = { tgbot: '✉', bots: '⚙', admin: '▦' };
 
@@ -35,12 +37,12 @@ export default function Automation() {
 
       <div className="auto-cards">
         {list.map((c) => (
-          <div key={c.id} className="card auto-card">
+          <Link key={c.id} href={'/uslugi/' + (servicePageById(c.id)?.slug || '')} className="card auto-card" style={{ color: 'var(--text)' }}>
             <div className="top"><i>{ICONS[c.id] || '✦'}</i><b>{c.priceLabel}</b></div>
             <b>{c.title}</b>
             <span>{c.text}</span>
             <div className="pts">{(c.points || []).map((p) => <span key={p}><i>✓</i>{p}</span>)}</div>
-          </div>
+          </Link>
         ))}
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>

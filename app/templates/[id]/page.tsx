@@ -7,6 +7,8 @@ import CTA from '@/components/CTA';
 import SiteCard from '@/components/SiteCard';
 import SitePreview from '@/components/SitePreview';
 import HomeEffects from '@/components/HomeEffects';
+import JsonLd from '@/components/JsonLd';
+import { templateLd } from '@/lib/seo';
 import { PRICES, SITES, findSite } from '@/lib/data';
 
 export const dynamicParams = false;
@@ -20,9 +22,16 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { id } = await params;
   const site = findSite(id);
   if (!site) return {};
+  const price = site.priceLabel.replace(/\u00A0/g, ' ');
+  const title = `${site.tagline} «${site.title}» — ${price}`;
+  const description = `${site.description} Адаптация под вашу компанию: тексты, логотип, цвета, контакты, мобильная версия. ${price}.`;
+  const img = site.cover || site.image;
   return {
-    title: `${site.title} — ${site.tagline.toLowerCase()} | Ванлав Сайты`,
-    description: `${site.description} Адаптация под ваш бизнес ${site.priceLabel.replace(/ /g, ' ')}.`,
+    title,
+    description,
+    alternates: { canonical: site.url },
+    openGraph: { title, description, url: site.url, images: [{ url: img || '/og.png' }] },
+    twitter: { card: 'summary_large_image', title, description, images: [img || '/og.png'] },
   };
 }
 
@@ -53,11 +62,12 @@ export default async function TemplatePage({ params }: Params) {
 
   return (
     <div id="top" style={{ minHeight: '100vh' }}>
+      <JsonLd data={templateLd(site)} />
       <HomeEffects />
       <Header base="/" ctaHref="#order" />
 
       <section className="container" style={{ paddingTop: 'clamp(28px,4vw,48px)' }}>
-        <div className="crumbs"><Link href="/#catalog">Каталог</Link><span>/</span><b>{site.niche}</b></div>
+        <nav className="crumbs" aria-label="Хлебные крошки"><Link href="/">Главная</Link><span>/</span><Link href="/#catalog">Готовые сайты</Link><span>/</span><b>{site.title}</b></nav>
         <div className="tpl-head">
           <div>
             <span className="eyebrow">{site.niche}{site.live && <span className="live-dot" style={{ textTransform: 'none', letterSpacing: 0 }}>Живой сайт</span>}</span>

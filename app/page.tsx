@@ -13,10 +13,15 @@ import Automation from '@/components/Automation';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 import HomeEffects from '@/components/HomeEffects';
+import Faq from '@/components/Faq';
+import JsonLd from '@/components/JsonLd';
+import { HOME_FAQ } from '@/lib/services-content';
+import { homeLd } from '@/lib/seo';
 
 export default function Home() {
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <JsonLd data={homeLd()} />
       <HomeEffects />
       <Header />
       <main>
@@ -31,6 +36,7 @@ export default function Home() {
         <div data-reveal=""><CustomBlock /></div>
         <div data-reveal=""><Services /></div>
         <Automation />
+        <div data-reveal=""><Faq items={HOME_FAQ} title="Частые вопросы о разработке сайтов" label="Вопросы и ответы" /></div>
         <div data-reveal=""><CTA /></div>
       </main>
       <Footer />

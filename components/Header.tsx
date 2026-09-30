@@ -28,7 +28,7 @@ export default function Header({ base = '', ctaHref }: { base?: string; ctaHref?
   return (
     <header className="header">
       <div className="container header-row">
-        <a href={base || '#top'} onClick={close} className="logo" aria-label="Ванлав Сайты — на главную"><Logo /></a>
+        <a href={base || '#top'} onClick={close} className="logo" aria-label="Ванлав — на главную"><Logo /></a>
         <nav className="nav-pill" aria-label="Основное меню">
           {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
         </nav>

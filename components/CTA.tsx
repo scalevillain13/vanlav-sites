@@ -17,7 +17,7 @@ export default function CTA({
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent-bot' | 'sent-tg'>('idle');
 
   const message = () =>
-    ['Здравствуйте! Заявка с сайта Ванлав Сайты.', presetTemplate ? 'Шаблон: ' + presetTemplate : '',
+    ['Здравствуйте! Заявка с сайта студии Ванлав.', presetTemplate ? 'Шаблон: ' + presetTemplate : '',
       'Имя: ' + form.name, 'Контакт: ' + form.contact, form.niche ? 'Ниша: ' + form.niche : '', form.comment ? 'Комментарий: ' + form.comment : '']
       .filter(Boolean).join('\n');
   const tgLink = CONTACT.telegramUrl + '?text=' + encodeURIComponent(message());

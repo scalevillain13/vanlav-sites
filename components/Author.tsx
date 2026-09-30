@@ -63,7 +63,7 @@ export default function Author() {
     { value: SITES.length, label: 'готовых шаблонов', color: '#F1EEE7' },
     { value: SERVICES.length + 1, label: 'направлений услуг', color: '#F1EEE7' },
   ];
-  const ringText = `${a.name} • веб-разработчик • ${a.city} • Ванлав Сайты • `.toUpperCase();
+  const ringText = `${a.name} • веб-разработчик • ${a.city} • студия Ванлав • `.toUpperCase();
 
   return (
     <section id="about" ref={rootRef} className={'author' + (seen ? ' seen' : '')}>
@@ -97,7 +97,7 @@ export default function Author() {
           <div className="author-text">
             <span className="label">Обо мне</span>
             <h2 className="author-h">Привет, я <span>{a.name}</span></h2>
-            <p className="author-bio">Мне {a.age} лет, живу в {a.city}, в веб-разработке {a.experienceYears} года. Ванлав Сайты — моя студия разработки сайтов: делаю сайты с нуля на заказ и готовые решения, и всем в ней я занимаюсь один: дизайн, вёрстка, тексты, SEO, защита, запуск, а также админ-панели и Telegram-боты для заявок. Вы общаетесь напрямую с тем, кто делает ваш сайт.</p>
+            <p className="author-bio">Мне {a.age} лет, живу в {a.city}, в веб-разработке {a.experienceYears} года. Ванлав — моя студия разработки сайтов: делаю сайты с нуля на заказ и готовые решения, и всем в ней я занимаюсь один: дизайн, вёрстка, тексты, SEO, защита, запуск, а также админ-панели и Telegram-боты для заявок. Вы общаетесь напрямую с тем, кто делает ваш сайт.</p>
             <div className="skills">
               <span>Что делаю:</span>
               <div>
@@ -141,7 +141,7 @@ export default function Author() {
             <div className="tl-bar"><div /></div>
             <div className="tl-years">
               {years.map((y, i) => (
-                <div key={y}><b>{y}</b><small>{i === 0 ? 'Начало в веб-разработке' : i === years.length - 1 ? 'Ванлав Сайты' : ''}</small></div>
+                <div key={y}><b>{y}</b><small>{i === 0 ? 'Начало в веб-разработке' : i === years.length - 1 ? 'Студия Ванлав' : ''}</small></div>
               ))}
             </div>
           </div>

@@ -1,20 +1,42 @@
 import type { Metadata, Viewport } from 'next';
+import './fonts';
 import './globals.css';
+import YandexMetrika from '@/components/YandexMetrika';
+import { BRAND, HOME_DESCRIPTION, HOME_TITLE, KEYWORDS, SITE_URL } from '@/lib/seo';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? 'https://' + process.env.VERCEL_PROJECT_PRODUCTION_URL : 'http://localhost:3000');
+const verification: Metadata['verification'] = {};
+if (process.env.NEXT_PUBLIC_YANDEX_VERIFICATION) verification.yandex = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION;
+if (process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION) verification.google = process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Ванлав Сайты — студия разработки сайтов',
-  description: 'Студия разработки сайтов: сайты полностью с нуля на заказ — от идеи и дизайна до запуска, а также готовые сайты под вашу нишу от 9 900 ₽. SEO, Telegram-боты и админ-панели.',
+  title: { default: HOME_TITLE, template: `%s | ${BRAND}` },
+  description: HOME_DESCRIPTION,
+  keywords: KEYWORDS,
+  applicationName: BRAND,
+  authors: [{ name: 'Александр', url: SITE_URL }],
+  creator: BRAND,
+  publisher: BRAND,
+  category: 'business',
+  formatDetection: { telephone: false },
+  alternates: { canonical: '/' },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   openGraph: {
-    title: 'Ванлав Сайты — студия разработки сайтов',
-    description: 'Разработка сайтов с нуля на заказ и готовые решения для бизнеса.',
-    locale: 'ru_RU',
     type: 'website',
-    siteName: 'Ванлав Сайты',
+    locale: 'ru_RU',
+    siteName: BRAND,
+    url: '/',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: `${BRAND} — студия разработки сайтов` }],
   },
-  icons: { icon: '/icon.svg' },
+  twitter: { card: 'summary_large_image', title: HOME_TITLE, description: HOME_DESCRIPTION, images: ['/og.png'] },
+  icons: {
+    icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/icon-96.png', sizes: '96x96', type: 'image/png' }, { url: '/icon-192.png', sizes: '192x192', type: 'image/png' }],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  manifest: '/manifest.webmanifest',
+  verification,
 };
 
 export const viewport: Viewport = {
@@ -26,13 +48,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Commissioner:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap" />
-      </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <YandexMetrika />
+      </body>
     </html>
   );
 }

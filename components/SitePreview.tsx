@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import Image from 'next/image';
 import type { Site } from '@/lib/data';
 
 const dark = (hex?: string) => {
@@ -13,10 +14,14 @@ export default function SitePreview({ site, eager = false, thumb = false }: { si
   const p = { panel: '#111214', panelInk: '#FFFFFF', ...site.preview };
 
   if (site.image) {
+    const useCover = thumb && !!site.cover;
+    const src = useCover ? site.cover! : site.image;
+    const h = (useCover ? site.coverH : site.imageH) || 800;
     return (
       <div style={{ width: '100%', background: p.bg, overflow: 'hidden' }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={(thumb && site.cover) || site.image} alt={site.title} loading={eager ? 'eager' : 'lazy'} decoding="async" style={{ display: 'block', width: '100%', height: 'auto' }} />
+        <Image src={src} alt={`${site.title} — ${site.tagline.toLowerCase()}, скриншот сайта`} width={1280} height={h}
+          sizes={thumb ? '(max-width: 700px) 100vw, 440px' : '(max-width: 1400px) 100vw, 1280px'}
+          loading={eager ? 'eager' : 'lazy'} quality={78} style={{ display: 'block', width: '100%', height: 'auto' }} />
       </div>
     );
   }
