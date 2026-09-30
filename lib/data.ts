@@ -111,6 +111,23 @@ const RAW_SITES: RawSite[] = [
       contactTitle: 'Вызовите мастера', contactSub: 'Перезвоним и согласуем время визита',
     },
   },
+  // Живой сайт — https://briz-inky.vercel.app/
+  {
+    id: 'briz', title: 'Бриз', niche: 'Клининговые услуги', group: 'Услуги',
+    description: 'Сайт клининговой компании: виды уборки с ценами, до/после, команда, отзывы и заявка в один клик.',
+    tagline: 'Готовый сайт для клининговой компании',
+    price: PRICES.ready.from, image: '/sites/briz/full.jpg', cover: '/sites/briz/cover.jpg', demoUrl: 'https://briz-inky.vercel.app/', domain: 'briz-inky.vercel.app',
+    preview: {
+      variant: 'stack', bg: '#F5F4EE', ink: '#13302A', muted: '#4A5A55', accent: '#D9F26B', accentInk: '#13302A',
+      heroBg: '#F5F4EE', heroInk: '#13302A', heroMuted: '#4A5A55', heroLine: '#DDDCD4', surface: '#FFFFFF', line: '#DDDCD4',
+      brand: 'бриз', phone: '+7 (862) 555-01-23', nav: ['Услуги', 'Цены', 'Наши работы', 'Контакты'],
+      eyebrow: 'Клининг в Сочи и Адлере', headline: 'Вы — на море. Мы — наводим чистоту',
+      sub: 'Уборка квартир, домов и апартаментов. Своя химия и фиксированная цена до приезда.',
+      cta: 'Заказать уборку', cta2: 'Цены', points: ['Поддерживающая', 'Генеральная', 'После ремонта'],
+      services: ['Поддерживающая', 'Генеральная', 'После ремонта', 'Посуточные квартиры'],
+      contactTitle: 'Закажите уборку', contactSub: 'Назовём цену по фото',
+    },
+  },
   {
     id: 'autopro', title: 'AutoPro', niche: 'Автосервис', group: 'Авто',
     description: 'Сайт автосервиса с услугами, записью на ремонт и контактами.',
@@ -143,22 +160,6 @@ const RAW_SITES: RawSite[] = [
       panelLabel: 'Каталог проектов', badge: 'Дом', badgeCaption: 'Газобетон, кирпич, каркас',
       services: ['Проектирование', 'Фундамент', 'Коробка и кровля', 'Отделка'],
       contactTitle: 'Рассчитаем ваш дом', contactSub: 'Пришлём смету по вашему проекту',
-    },
-  },
-  {
-    id: 'cleanpro', title: 'CleanPro', niche: 'Клининговые услуги', group: 'Услуги',
-    description: 'Сайт клининговой компании с видами уборки и онлайн-заявкой.',
-    tagline: 'Готовый сайт для клининговой компании',
-    price: PRICES.ready.from, image: '', demoUrl: '', domain: 'cleanpro.ru',
-    preview: {
-      variant: 'stack', bg: '#F6FAF8', ink: '#0F2A22', muted: '#4A6159', accent: '#13896F', accentInk: '#FFFFFF',
-      heroBg: '#E4F1EC', heroInk: '#0F2A22', heroMuted: '#4A6159', heroLine: '#C6DDD4', surface: '#FFFFFF', line: '#DCE8E3',
-      brand: 'CleanPro', phone: '+7 (900) 000-00-00', nav: ['Уборка', 'Цены', 'Как работаем', 'Контакты'],
-      eyebrow: 'Клининг квартир и офисов', headline: 'Чистота без вашего участия',
-      sub: 'Поддерживающая, генеральная и уборка после ремонта. Свои средства и оборудование.',
-      cta: 'Заказать уборку', cta2: 'Рассчитать цену', points: ['Генеральная уборка', 'После ремонта', 'Мойка окон'],
-      services: ['Поддерживающая', 'Генеральная', 'После ремонта', 'Офисы'],
-      contactTitle: 'Закажите уборку', contactSub: 'Рассчитаем стоимость по площади',
     },
   },
   {
