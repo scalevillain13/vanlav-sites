@@ -12,20 +12,20 @@ export default function Hero() {
       <div className="hero-grid-bg" aria-hidden="true"><div /></div>
       <div className="hero-inner">
         <div className="hero-top">
-          <span className="pill-tag">Студия готовых сайтов</span>
-          <span>{count} шаблонов под разные ниши</span>
+          <span className="pill-tag">Студия разработки сайтов</span>
+          <span>Сайты с нуля на заказ · {count} готовых решений</span>
         </div>
         <h1 className="h1">
-          <span className="line"><span>Готовый сайт для бизнеса.</span></span>
-          <span className="line"><span>Без разработки с нуля.</span></span>
+          <span className="line"><span>Разработка сайтов для бизнеса.</span></span>
+          <span className="line"><span>С нуля или на готовой основе.</span></span>
         </h1>
 
         <div className="hero-cols">
           <div className="hero-left">
-            <p className="hero-sub">Выберите готовый дизайн под свою нишу — я адаптирую его под вашу компанию, услуги и контакты.</p>
+            <p className="hero-sub">Делаю сайты полностью с нуля на заказ — от идеи и дизайна до запуска. Нужно быстрее и дешевле — адаптирую готовый сайт из каталога под вашу компанию.</p>
             <div className="btn-row">
-              <a href="#catalog" className="btn btn-accent btn-icon">Смотреть сайты <span className="ic">↓</span></a>
-              <a href="#custom" className="btn btn-outline">Нужен сайт под другую нишу</a>
+              <a href="#contact" className="btn btn-accent btn-icon">Заказать сайт <span className="ic">→</span></a>
+              <a href="#catalog" className="btn btn-outline">Смотреть готовые сайты</a>
             </div>
             <a href="#about" className="author-pill">
               <span className="av">
@@ -50,7 +50,7 @@ export default function Hero() {
         </div>
 
         <div className="trust">
-          {[['◧', 'Готовые решения'], ['✎', 'Адаптация под ваш бизнес'], ['↗', 'Быстрый запуск']].map(([ic, t]) => (
+          {[['✎', 'Сайты с нуля под ключ'], ['◧', 'Готовые решения'], ['↗', 'Быстрый запуск']].map(([ic, t]) => (
             <div key={t}><span className="ic">{ic}</span><span className="tx">{t}</span></div>
           ))}
         </div>

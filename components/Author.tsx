@@ -97,9 +97,9 @@ export default function Author() {
           <div className="author-text">
             <span className="label">Обо мне</span>
             <h2 className="author-h">Привет, я <span>{a.name}</span></h2>
-            <p className="author-bio">Мне {a.age} лет, живу в {a.city}, в веб-разработке {a.experienceYears} года. Ванлав Сайты — моя студия продажи сайтов, и всем в ней я занимаюсь один: дизайн, вёрстка, тексты, SEO, защита, запуск, а также админ-панели и Telegram-боты для заявок. Вы общаетесь напрямую с тем, кто делает ваш сайт.</p>
+            <p className="author-bio">Мне {a.age} лет, живу в {a.city}, в веб-разработке {a.experienceYears} года. Ванлав Сайты — моя студия разработки сайтов: делаю сайты с нуля на заказ и готовые решения, и всем в ней я занимаюсь один: дизайн, вёрстка, тексты, SEO, защита, запуск, а также админ-панели и Telegram-боты для заявок. Вы общаетесь напрямую с тем, кто делает ваш сайт.</p>
             <div className="skills">
-              <span>Кроме готовых сайтов делаю:</span>
+              <span>Что делаю:</span>
               <div>
                 {SKILLS.map((s, i) => <span key={s} className="chip skill" style={{ transitionDelay: (0.4 + i * 0.07) + 's' }}><i>✦</i>{s}</span>)}
               </div>

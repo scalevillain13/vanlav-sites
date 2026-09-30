@@ -26,9 +26,9 @@ export default function Benefits() {
       <div className="sec-head">
         <div>
           <span className="label">Преимущества</span>
-          <h2 className="h2">Почему не нужно делать сайт с нуля?</h2>
+          <h2 className="h2">С нуля или на готовой основе?</h2>
         </div>
-        <p className="lead" style={{ maxWidth: 480 }}>В готовом сайте большая часть этапов уже пройдена. Остаётся наполнить его вашим контентом и запустить.</p>
+        <p className="lead" style={{ maxWidth: 480 }}>Сайт с нуля — полностью под вашу задачу. Готовый — когда важны сроки и бюджет: большая часть этапов уже пройдена, остаётся адаптировать и запустить.</p>
       </div>
 
       <div className="card compare">

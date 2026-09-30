@@ -15,7 +15,7 @@ export default function Footer({ base = '' }: { base?: string }) {
         <div className="footer-grid">
           <div>
             <span className="logo" style={{ color: 'var(--text)' }}><Logo /></span>
-            <span>Готовые сайты для бизнеса</span>
+            <span>Студия разработки сайтов</span>
           </div>
           <nav aria-label="Навигация в подвале">
             {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}

@@ -8,8 +8,8 @@ type Props = {
 };
 
 export default function CTA({
-  anchor = 'contact', title = 'Вашему бизнесу нужен сайт?', text = 'Покажем готовые варианты или соберём решение под вашу задачу.',
-  button = 'Подобрать сайт', presetTemplate = '', presetNiche = '',
+  anchor = 'contact', title = 'Вашему бизнесу нужен сайт?', text = 'Разработаю сайт с нуля под вашу задачу или подберу готовое решение.',
+  button = 'Обсудить проект', presetTemplate = '', presetNiche = '',
 }: Props) {
   const empty = { name: '', contact: '', niche: presetNiche, comment: '', website: '' };
   const [form, setForm] = useState(empty);

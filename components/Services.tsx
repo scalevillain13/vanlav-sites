@@ -9,10 +9,10 @@ export default function Services() {
     <section id="services" ref={ref} className="section">
       <div className="sec-head">
         <div>
-          <span className="label">Другие услуги</span>
-          <h2 className="h2">Не только готовые сайты</h2>
+          <span className="label">Услуги</span>
+          <h2 className="h2">Сайты полностью с нуля на заказ</h2>
         </div>
-        <p className="lead">Делаю сайты и дизайн с нуля, логотипы, настраиваю SEO и защиту сайта, разрабатываю админ-панели и Telegram-ботов. Цены стартовые — итог зависит от задачи.</p>
+        <p className="lead">Разрабатываю сайты с нуля под вашу задачу: структура, уникальный дизайн, вёрстка, тексты и запуск — без шаблонов. Также логотипы, SEO, защита сайта, админ-панели и Telegram-боты. Цены стартовые — итог зависит от задачи.</p>
       </div>
       <div className="srv-list">
         {SERVICES.map((s, i) => (

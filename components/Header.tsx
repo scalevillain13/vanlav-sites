@@ -32,7 +32,7 @@ export default function Header({ base = '', ctaHref }: { base?: string; ctaHref?
         <nav className="nav-pill" aria-label="Основное меню">
           {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
         </nav>
-        <a href={cta} className="btn btn-accent header-cta">Подобрать сайт <span>→</span></a>
+        <a href={cta} className="btn btn-accent header-cta">Заказать сайт <span>→</span></a>
         <button type="button" onClick={() => setOpen((o) => !o)} aria-label="Меню" aria-expanded={open} className={'burger' + (open ? ' open' : '')}>
           <span style={{ position: 'relative', width: 18, height: 12, display: 'block', background: 'none' }}>
             <span className="b1" /><span className="b2" />
@@ -42,7 +42,7 @@ export default function Header({ base = '', ctaHref }: { base?: string; ctaHref?
       {open && (
         <div className="mobile-menu">
           {links.map((l) => <a key={l.href} href={l.href} onClick={close} className="mm-link">{l.label}<span>↗</span></a>)}
-          <a href={cta} onClick={close} className="btn btn-accent mm-cta">Подобрать сайт</a>
+          <a href={cta} onClick={close} className="btn btn-accent mm-cta">Заказать сайт</a>
           <a href={CONTACT.telegramUrl} target="_blank" rel="noopener" className="mm-tg">Telegram {CONTACT.telegram}</a>
         </div>
       )}
