@@ -102,9 +102,9 @@ const RAW_SITES: RawSite[] = [
     id: 'napor', title: 'НАПОР', niche: 'Сантехника', group: 'Услуги',
     description: 'Сайт аварийной сантехнической службы: 3D-план квартиры, прайс-диапазоны и вызов мастера за 40 минут.',
     tagline: 'Готовый сайт для сантехнической службы',
-    price: PRICES.ready.from, image: '/sites/napor/full.jpg', imageH: 6508, cover: '/sites/napor/cover.jpg', coverH: 700, demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
+    price: PRICES.ready.from, image: '/sites/napor/full.jpg', imageH: 10390, cover: '/sites/napor/cover.jpg', coverH: 701, demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
     preview: {
-      variant: 'split', bg: '#F3F3EF', ink: '#14171A', muted: '#4B5058', accent: '#F05A22', accentInk: '#FFFFFF',
+      variant: 'split', bg: '#F3F3EF', ink: '#14171A', muted: '#4B5058', accent: '#3BB1DF', accentInk: '#FFFFFF',
       panel: '#14171A', panelInk: '#FFFFFF', surface: '#FFFFFF', line: '#DDDDD6',
       brand: 'НАПОР', phone: '+7 (843) 200-00-00', nav: ['Услуги', 'Цены', 'О мастере', 'Контакты'],
       eyebrow: 'Сантехнические работы', headline: 'Сантехник на дом в день обращения',
