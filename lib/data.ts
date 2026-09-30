@@ -1,4 +1,5 @@
-// Ванлав Сайты — данные. Редактируйте здесь: контакты, цены, услуги, шаблоны.
+// Ванлав — данные. Редактируйте здесь: контакты, цены, услуги, шаблоны.
+import MOCK_PREVIEWS from './mock-previews.json';
 
 export type Preview = {
   variant: 'split' | 'stack';
@@ -302,8 +303,12 @@ const RAW_SITES: RawSite[] = [
   },
 ];
 
+const MOCK_H = MOCK_PREVIEWS as Record<string, number>;
+
 export const SITES: Site[] = RAW_SITES.map((s) => ({
   ...s,
+  // для заглушек — заранее отрендеренная картинка макета (npm run previews)
+  ...(!s.image && MOCK_H[s.id] ? { cover: `/sites/mock/${s.id}.webp`, coverH: MOCK_H[s.id] } : {}),
   priceLabel: formatPrice(s.price),
   url: '/templates/' + s.id,
   // живой сайт открывается напрямую (он запрещает встраивание в iframe), иначе — встроенное демо

@@ -24,7 +24,8 @@ export default function Automation() {
 
       <div className="auto-box">
         <div className="grid" aria-hidden="true" />
-        <div className="auto-stage"><Devices3D mode="automation" sites={SITES} startId="napor" /></div>
+        <div className="auto-stage"><Devices3D mode="automation" sites={SITES} startId="napor"
+          poster={{ desktop: '/brand/auto-poster.webp', mobile: '/brand/auto-poster-m.webp', alt: 'Админ-панель заявок, Telegram-бот и ноутбук' }} /></div>
         <div className="flow">
           {nodes.map((n) => (
             <div key={n.label} className="flow-node" style={{ flex: n.flex }}>

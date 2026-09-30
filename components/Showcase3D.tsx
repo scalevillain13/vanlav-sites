@@ -66,7 +66,7 @@ export default function Showcase3D() {
                     <span className="dots"><i /><i /><i /></span>
                     <small>{site.domain}</small>
                   </div>
-                  <div className="shot"><SitePreview site={site} eager={i < 3} thumb /></div>
+                  <div className="shot"><SitePreview site={site} thumb /></div>
                 </div>
               </Link>
             ))}

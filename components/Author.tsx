@@ -12,14 +12,17 @@ export default function Author() {
   const rigRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [seen, setSeen] = useState(false);
-  const [k, setK] = useState(0);
+  const statRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     let raf = 0;
+    // в HTML — итоговые числа (для поисковиков и без JS), анимация стартует с нуля
+    statRefs.current.forEach((el) => { if (el && el.getBoundingClientRect().top > window.innerHeight) el.textContent = '0'; });
     const go = () => {
       setSeen(true);
       const t0 = performance.now();
-      const step = (t: number) => { const x = Math.min(1, (t - t0) / 1600); setK(1 - Math.pow(1 - x, 3)); if (x < 1) raf = requestAnimationFrame(step); };
+      // счётчики обновляем напрямую в DOM — без перерисовки всего блока 60 раз в секунду
+      const step = (t: number) => { const x = Math.min(1, (t - t0) / 1600); const k = 1 - Math.pow(1 - x, 3); statRefs.current.forEach((el) => { if (el) el.textContent = String(Math.round(Number(el.dataset.v) * k)); }); if (x < 1) raf = requestAnimationFrame(step); };
       raf = requestAnimationFrame(step);
     };
     const el = rootRef.current;
@@ -112,8 +115,8 @@ export default function Author() {
         </div>
 
         <div className="stats">
-          {stats.map((s) => (
-            <div key={s.label} className="card stat"><b style={{ color: s.color }}>{Math.round(s.value * k)}</b><span>{s.label}</span></div>
+          {stats.map((s, i) => (
+            <div key={s.label} className="card stat"><b ref={(el) => { statRefs.current[i] = el; }} data-v={s.value} style={{ color: s.color }}>{s.value}</b><span>{s.label}</span></div>
           ))}
         </div>
 

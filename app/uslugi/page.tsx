@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: '/uslugi' },
-  openGraph: { title: TITLE, description: DESC, url: '/uslugi', images: [{ url: '/og.png', width: 1200, height: 630 }] },
+  openGraph: { title: TITLE, description: DESC, url: '/uslugi', images: [{ url: '/og.jpg', width: 1200, height: 630 }] },
 };
 
 export default function ServicesHub() {

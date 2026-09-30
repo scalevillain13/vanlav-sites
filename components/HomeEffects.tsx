@@ -7,17 +7,22 @@ export default function HomeEffects({ cursor = true }: { cursor?: boolean }) {
   const curRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let sraf = 0;
     const onScroll = () => {
-      const b = barRef.current; if (!b) return;
-      const H = document.documentElement.scrollHeight - window.innerHeight;
-      b.style.width = (H > 0 ? (window.scrollY / H) * 100 : 0) + '%';
+      if (sraf) return;
+      sraf = requestAnimationFrame(() => {
+        sraf = 0;
+        const b = barRef.current; if (!b) return;
+        const H = document.documentElement.scrollHeight - window.innerHeight;
+        b.style.transform = `scaleX(${H > 0 ? Math.min(1, window.scrollY / H) : 0})`;
+      });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
     let craf = 0;
     let onMouse: ((e: MouseEvent) => void) | undefined;
-    if (cursor && window.matchMedia('(pointer:fine)').matches) {
+    if (cursor && window.matchMedia('(pointer: fine) and (hover: hover)').matches) {
       let tx = -100, ty = -100, x = -100, y = -100;
       const loop = () => {
         x += (tx - x) * 0.18; y += (ty - y) * 0.18;
@@ -33,8 +38,19 @@ export default function HomeEffects({ cursor = true }: { cursor?: boolean }) {
         const hot = t && t.closest && t.closest('a,button,select,input,textarea,[role=tab]');
         c.classList.toggle('hot', !!hot);
       };
-      window.addEventListener('mousemove', onMouse);
+      window.addEventListener('mousemove', onMouse, { passive: true });
     }
+
+    // Ленивый рендер секций (content-visibility) ускоряет первую отрисовку. Чтобы переходы по якорям
+    // были точными, после загрузки в простое (или сразу при клике по ссылке-якорю) дорендериваем всё.
+    const root = document.documentElement;
+    const cvDone = () => root.classList.add('cv-done');
+    const onAnchor = (e: MouseEvent) => { const a = (e.target as Element | null)?.closest?.('a[href*="#"]'); if (a) cvDone(); };
+    document.addEventListener('click', onAnchor, true);
+    let idleId = 0;
+    const idle = () => { const w = window as Window; idleId = typeof w.requestIdleCallback === 'function' ? w.requestIdleCallback(cvDone, { timeout: 4000 }) : setTimeout(cvDone, 2500) as unknown as number; };
+    if (document.readyState === 'complete') setTimeout(idle, 1500); else window.addEventListener('load', () => setTimeout(idle, 1500), { once: true });
+    if (location.hash) cvDone();
 
     let io: IntersectionObserver | undefined;
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -49,7 +65,10 @@ export default function HomeEffects({ cursor = true }: { cursor?: boolean }) {
       window.removeEventListener('scroll', onScroll);
       if (onMouse) window.removeEventListener('mousemove', onMouse);
       cancelAnimationFrame(craf);
+      cancelAnimationFrame(sraf);
       io?.disconnect();
+      document.removeEventListener('click', onAnchor, true);
+      if (typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(idleId);
     };
   }, [cursor]);
 

@@ -1,14 +1,14 @@
-'use client';
-import { useEffect, useState } from 'react';
+import { preload } from 'react-dom';
 import Devices3D from './Devices3D';
 import { AUTHOR, SITES, PRICES, formatPrice } from '@/lib/data';
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setMounted(true), 60); return () => clearTimeout(t); }, []);
+  // постер 3D-сцены — самый крупный элемент первого экрана (LCP): грузим с высоким приоритетом
+  preload('/brand/hero-poster-m.webp', { as: 'image', fetchPriority: 'high', media: '(max-width: 799px)' });
+  preload('/brand/hero-poster.webp', { as: 'image', fetchPriority: 'high', media: '(min-width: 800px)' });
   const count = SITES.length;
   return (
-    <section id="top" className={'hero' + (mounted ? ' mounted' : '')}>
+    <section id="top" className="hero">
       <div className="hero-grid-bg" aria-hidden="true"><div /></div>
       <div className="hero-inner">
         <div className="hero-top">
@@ -41,7 +41,8 @@ export default function Hero() {
           </div>
 
           <div className="hero-stage">
-            <Devices3D mode="hero" sites={SITES} startId="napor" />
+            <Devices3D mode="hero" sites={SITES} startId="napor" priority
+              poster={{ desktop: '/brand/hero-poster.webp', mobile: '/brand/hero-poster-m.webp', alt: '3D-ноутбук с сайтами из каталога студии Ванлав' }} />
             <a href="#catalog" className="hero-float">
               <span className="t"><b>На экране — шаблоны из каталога</b><small>{count} готовых сайтов</small></span>
               <span className="p">{formatPrice(PRICES.ready.from)}</span>

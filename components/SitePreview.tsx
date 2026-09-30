@@ -13,15 +13,16 @@ const dark = (hex?: string) => {
 export default function SitePreview({ site, eager = false, thumb = false }: { site: Site; eager?: boolean; thumb?: boolean }) {
   const p = { panel: '#111214', panelInk: '#FFFFFF', ...site.preview };
 
-  if (site.image) {
+  if (site.image || (thumb && site.cover)) {
     const useCover = thumb && !!site.cover;
     const src = useCover ? site.cover! : site.image;
+    const alt = site.image ? `${site.title} — ${site.tagline.toLowerCase()}, скриншот сайта` : `${site.title} — макет: ${site.tagline.toLowerCase()}`;
     const h = (useCover ? site.coverH : site.imageH) || 800;
     return (
       <div style={{ width: '100%', background: p.bg, overflow: 'hidden' }}>
-        <Image src={src} alt={`${site.title} — ${site.tagline.toLowerCase()}, скриншот сайта`} width={1280} height={h}
+        <Image src={src} alt={alt} width={1280} height={h}
           sizes={thumb ? '(max-width: 700px) 100vw, 440px' : '(max-width: 1400px) 100vw, 1280px'}
-          loading={eager ? 'eager' : 'lazy'} quality={78} style={{ display: 'block', width: '100%', height: 'auto' }} />
+          loading={eager ? 'eager' : 'lazy'} fetchPriority={eager && !thumb ? 'high' : 'auto'} quality={78} style={{ display: 'block', width: '100%', height: 'auto' }} />
       </div>
     );
   }

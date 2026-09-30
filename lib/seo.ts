@@ -31,7 +31,7 @@ export function organizationLd() {
     description: HOME_DESCRIPTION,
     url: abs('/'),
     logo: abs('/icon-512.png'),
-    image: abs('/og.png'),
+    image: abs('/og.jpg'),
     priceRange: '₽₽',
     currenciesAccepted: 'RUB',
     address: { '@type': 'PostalAddress', addressLocality: CITY, addressRegion: 'Краснодарский край', addressCountry: 'RU' },

@@ -10,9 +10,11 @@ export default function Header({ base = '', ctaHref }: { base?: string; ctaHref?
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+  // пока открыто меню, страница под ним не скроллится (блокируем на <html>: так работает и в iOS Safari)
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    const el = document.documentElement;
+    el.classList.toggle('menu-open', open);
+    return () => el.classList.remove('menu-open');
   }, [open]);
 
   const links = [
@@ -23,7 +25,8 @@ export default function Header({ base = '', ctaHref }: { base?: string; ctaHref?
     { label: 'Обо мне', href: base + '#about' },
   ];
   const cta = ctaHref || base + '#contact';
-  const close = () => setOpen(false);
+  // снимаем блокировку сразу, до перехода по якорю — иначе браузер не сможет прокрутить к секции
+  const close = () => { document.documentElement.classList.remove('menu-open'); setOpen(false); };
 
   return (
     <header className="header">

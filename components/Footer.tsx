@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { CONTACT, SERVICES } from '@/lib/data';
 import { SERVICE_PAGES } from '@/lib/services-content';
 
@@ -15,8 +16,7 @@ export default function Footer({ base = '' }: { base?: string }) {
       <div className="footer-inner">
         <div className="footer-grid">
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo.png" alt="Ванлав — студия разработки сайтов" width={240} height={146} className="footer-logo" loading="lazy" />
+            <Image src="/brand/logo.png" alt="Ванлав — студия разработки сайтов" width={240} height={146} className="footer-logo" sizes="240px" />
           </div>
           <nav aria-label="Навигация в подвале">
             {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
@@ -30,7 +30,11 @@ export default function Footer({ base = '' }: { base?: string }) {
             <b>{CONTACT.telegram} ↗</b>
           </a>
         </div>
-        <div aria-hidden="true" className="wordmark">ВАН<span style={{ color: '#2A1409' }}>ЛАВ</span></div>
+        <svg aria-hidden="true" focusable="false" className="wordmark" viewBox="0 0 1000 170" preserveAspectRatio="xMinYMid meet">
+          <text x="0" y="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fontFamily="Unbounded, 'Unbounded Fallback', sans-serif" fontWeight="700" fontSize="190">
+            <tspan fill="#161614">ВАН</tspan><tspan fill="#2A1409">ЛАВ</tspan>
+          </text>
+        </svg>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Ванлав — студия разработки сайтов · Сочи</span>
           <a href="#top">Наверх ↑</a>

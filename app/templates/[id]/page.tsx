@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: site.url },
-    openGraph: { title, description, url: site.url, images: [{ url: img || '/og.png' }] },
-    twitter: { card: 'summary_large_image', title, description, images: [img || '/og.png'] },
+    openGraph: { title, description, url: site.url, images: [{ url: img || '/og.jpg' }] },
+    twitter: { card: 'summary_large_image', title, description, images: [img || '/og.jpg'] },
   };
 }
 
