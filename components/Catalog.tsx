@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { CATEGORIES, SITES } from '@/lib/data';
 import SiteCard from './SiteCard';
 import { Note } from './Doodle';
+import { GlowArrow, Sparkle } from './Glow';
 
 const FIRST = 6;
 // сначала живые сайты, потом демо-шаблоны
@@ -49,6 +50,8 @@ export default function Catalog() {
       </div>
       {(rest > 0 || all) && list.length > FIRST && (
         <div className="cat-more">
+          <GlowArrow kind="curve" className="cat-arrow" />
+          <Sparkle size={18} style={{ position: 'relative' }} />
           <button type="button" className={'cat-more-btn' + (all ? ' open' : '')} aria-expanded={all} onClick={() => {
             if (all) document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
             setAll(!all);

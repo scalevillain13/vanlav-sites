@@ -13,6 +13,15 @@ export default function Showcase3D() {
   const [w, setW] = useState(1280);
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);
+  // карточки витрины монтируем, только когда секция подъезжает к экрану
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = rootRef.current; if (!el) return;
+    if (!('IntersectionObserver' in window) || location.hash) { setNear(true); return; }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setNear(true); io.disconnect(); } }, { rootMargin: '120% 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const cw = w < 700 ? 230 : w < 1100 ? 320 : 420;
   const R = Math.round((cw / 2 + 18) / Math.tan(Math.PI / n));
@@ -66,7 +75,7 @@ export default function Showcase3D() {
                     <span className="dots"><i /><i /><i /></span>
                     <small>{site.domain}</small>
                   </div>
-                  <div className="shot"><SitePreview site={site} thumb /></div>
+                  <div className="shot">{near && <SitePreview site={site} thumb />}</div>
                 </div>
               </Link>
             ))}

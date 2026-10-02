@@ -115,6 +115,15 @@ export default function Anatomy() {
   const barRef = useRef<HTMLSpanElement>(null);
   const [step, setStep] = useState(0);
   const [still, setStill] = useState(false);
+  // тяжёлые иллюстрации монтируем, только когда секция подъезжает к экрану
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = rootRef.current; if (!el) return;
+    if (!('IntersectionObserver' in window) || location.hash) { setNear(true); return; }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setNear(true); io.disconnect(); } }, { rootMargin: '150% 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const stepRef = useRef(0);
 
   useEffect(() => {
@@ -183,7 +192,7 @@ export default function Anatomy() {
           <div ref={rigRef} className="anat-rig">
             {layers.map((l, i) => (
               <div key={l.key} className={'anat-layer L-' + l.key + (step <= 3 && step !== i ? ' dim' : '') + (step === i ? ' cur' : '')} style={{ ['--i' as string]: i }}>
-                {l.el}
+                {near && l.el}
                 <span className="anat-tag">{String(i + 1).padStart(2, '0')} · {l.name}</span>
               </div>
             ))}

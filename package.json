@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "previews": "node scripts/render-previews.mjs"
+    "previews": "node scripts/render-previews.mjs",
+    "slices": "node scripts/slice-screens.mjs"
   },
   "dependencies": {
     "next": "^16.3.7",

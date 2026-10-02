@@ -1,39 +1,39 @@
 {
  "scores": {
-  "performance": 99,
+  "performance": 98,
   "accessibility": 100,
   "best-practices": 100,
   "seo": 100
  },
  "vitals": {
-  "fcp": 0.62,
-  "lcp": 0.99,
+  "fcp": 0.57,
+  "lcp": 1.0,
   "tbt": 0,
   "cls": 0.0
  },
  "frames": [
   {
-   "t": 375,
+   "t": 417,
    "src": "/speed/f0.webp"
   },
   {
-   "t": 750,
+   "t": 833,
    "src": "/speed/f1.webp"
   },
   {
-   "t": 1125,
+   "t": 1250,
    "src": "/speed/f2.webp"
   },
   {
-   "t": 1500,
+   "t": 1666,
    "src": "/speed/f3.webp"
   },
   {
-   "t": 1875,
+   "t": 2083,
    "src": "/speed/f4.webp"
   },
   {
-   "t": 2250,
+   "t": 2499,
    "src": "/speed/f5.webp"
   }
  ]

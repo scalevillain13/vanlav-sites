@@ -18,6 +18,8 @@ import Anatomy from '@/components/Anatomy';
 import Speed from '@/components/Speed';
 import Shots from '@/components/Shots';
 import Pains from '@/components/Pains';
+import Growth from '@/components/Growth';
+import { Divider } from '@/components/Glow';
 import JsonLd from '@/components/JsonLd';
 import { HOME_FAQ } from '@/lib/services-content';
 import { homeLd } from '@/lib/seo';
@@ -32,18 +34,23 @@ export default function Home() {
         <Hero />
         <Marquee />
         <Pains />
+        <Growth />
+        <Divider />
         <Author />
         <Showcase3D />
         <div data-reveal=""><Catalog /></div>
         <Shots />
+        <Divider mark="diamond" />
         <div data-reveal=""><Process /></div>
         <div data-reveal=""><Benefits /></div>
         <div data-reveal=""><Pricing /></div>
         <div data-reveal=""><CustomBlock /></div>
         <Anatomy />
+        <Divider mark="arrows" />
         <Speed />
         <div data-reveal=""><Services /></div>
         <Automation />
+        <Divider />
         <div data-reveal=""><Faq items={HOME_FAQ} title="Частые вопросы о разработке сайтов" label="Вопросы и ответы" /></div>
         <div data-reveal=""><CTA /></div>
       </main>

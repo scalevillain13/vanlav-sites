@@ -4,6 +4,7 @@ import Devices3D from './Devices3D';
 import { AUTHOR, SITES, SCREEN_SITES, PRICES, formatPrice } from '@/lib/data';
 import { ArrowRight } from './Icons';
 import { Doodle, Note } from './Doodle';
+import { Orbit, Sparkles } from './Glow';
 
 const ic = (d: React.ReactNode) => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{d}</svg>;
 const TRUST: [React.ReactNode, string][] = [
@@ -54,8 +55,8 @@ export default function Hero() {
             <Devices3D mode="hero" sites={SCREEN_SITES} startId="briz" priority
               poster={{ desktop: '/brand/hero-poster.webp', mobile: '/brand/hero-poster-m.webp', alt: '3D-ноутбук с сайтами из каталога студии Ванлав' }} />
             <Note className="hero-note hide-m" rot={-7} arrow="arrow" arrowStyle={{ width: 70, transform: 'rotate(-75deg) scaleY(-1)' }}>это живые сайты —<br />листаются сами</Note>
-            <Doodle kind="sparkle" className="hero-spark s1" />
-            <Doodle kind="star" className="hero-spark s2" />
+            <Orbit className="hero-orbit" />
+            <Sparkles className="hero-sparkles" items={[[6, 14, 18], [97, 4, 24], [99, 62, 14, true], [3, 58, 20], [42, 1, 12, true], [74, 98, 16]]} />
             <a href="#catalog" className="hero-float">
               <span className="t"><b>На экране — живые сайты и шаблоны</b><small>{count} готовых решений</small></span>
               <span className="p">{formatPrice(PRICES.ready.from)}</span>

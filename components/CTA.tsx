@@ -56,7 +56,6 @@ export default function CTA({
             <span><small>Пишите в Telegram</small><b>{CONTACT.telegram}</b></span>
           </a>
         </div>
-        <Doodle kind="arrow" className="cta-arrow" />
         <span className="cta-hand hand" aria-hidden="true">отвечу сегодня</span>
         <Doodle kind="star" className="cta-star" />
         <div className="cta-form-wrap">

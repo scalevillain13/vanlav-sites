@@ -17,6 +17,7 @@ export default function Footer({ base = '' }: { base?: string }) {
         <div className="footer-grid">
           <div>
             <Image src="/brand/logo.png" alt="Ванлав — студия разработки сайтов" width={240} height={146} className="footer-logo" sizes="240px" />
+            <div className="footer-tag" aria-hidden="true"><span className="hand">Делаем красиво. Делаем с умом.</span><svg viewBox="0 0 260 20"><path d="M4 12 C 70 4, 150 4, 256 10" /></svg></div>
           </div>
           <nav aria-label="Навигация в подвале">
             {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}

@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { SITES } from '@/lib/data';
 import { Doodle, Note } from './Doodle';
 import { ArrowUpRight } from './Icons';
+import { Brackets } from './Glow';
 
 // Что реально есть на каждом живом сайте (по их экранам)
 const FEATURES: Record<string, { lead: string; items: string[]; note: string }> = {
@@ -54,6 +55,7 @@ export default function Shots() {
           return (
             <article key={s.id} className={'live-row' + (i % 2 ? ' flip' : '')}>
               <div className="lw">
+                <Brackets className="lw-br" />
                 <div className="lw-bar">
                   <span className="dots"><i /><i /><i /></span>
                   <span className="lw-url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>{s.domain}</span>
@@ -61,7 +63,10 @@ export default function Shots() {
                 </div>
                 <div className="lw-view" style={{ ['--dur' as string]: dur + 's', ['--bg' as string]: s.preview.bg }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.image.replace(/\.jpe?g$/, '.webp')} alt={`${s.title} — сайт целиком`} width={1280} height={s.imageH} loading="lazy" decoding="async" />
+                  <picture>
+                    <source media="(max-width: 760px)" srcSet={s.image.replace(/full\.jpe?g$/, 'full-sm.webp')} />
+                    <img src={s.image.replace(/\.jpe?g$/, '.webp')} alt={`${s.title} — сайт целиком`} width={1280} height={s.imageH} loading="lazy" decoding="async" />
+                  </picture>
                 </div>
                 <Note className={'lw-note hide-m ' + (i % 2 ? 'l' : 'r')} rot={i % 2 ? -5 : 4} arrow={i % 2 ? 'arrow' : 'loop'} arrowStyle={{ width: 76, transform: i % 2 ? 'scaleX(-1) rotate(-20deg)' : 'scaleX(-1) rotate(40deg)' }}>{f.note}</Note>
               </div>

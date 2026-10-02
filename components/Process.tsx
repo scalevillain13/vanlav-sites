@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { CONTACT } from '@/lib/data';
 import { Doodle, Note } from './Doodle';
+import LazyVis from './LazyVis';
 
 /**
  * «Как это работает»: четыре шага, соединённые рисованной линией. Линия прорисовывается по мере
@@ -150,7 +151,7 @@ export default function Process() {
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
                 </div>
-                <div className="proc-vis"><V /></div>
+                <LazyVis className="proc-vis"><V /></LazyVis>
               </li>
             );
           })}

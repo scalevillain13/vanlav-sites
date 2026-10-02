@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { useSeen } from './useSeen';
 import { Note } from './Doodle';
+import LazyVis from './LazyVis';
 import SPEED from '@/lib/speed.json';
 
 // Замер этой страницы в Google Lighthouse (десктоп): баллы, метрики и кадры загрузки — из отчёта.
@@ -90,7 +91,7 @@ export default function Speed() {
 
         <div className="film">
           <div className="film-head"><span>Как загружается эта страница</span><small>кадры из отчёта Lighthouse</small></div>
-          <div className="film-strip">
+          <LazyVis className="film-strip" ariaHidden={false}>
             {SPEED.frames.map((f, i) => (
               <figure key={f.src} style={{ ['--i' as string]: i }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -99,7 +100,7 @@ export default function Speed() {
               </figure>
             ))}
             <span className="playhead" aria-hidden="true" />
-          </div>
+          </LazyVis>
           <Note className="film-note hide-m" rot={-4}>меньше секунды — и всё на месте</Note>
         </div>
       </div>
