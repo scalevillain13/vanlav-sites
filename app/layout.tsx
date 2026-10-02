@@ -4,6 +4,7 @@ import './fonts';
 import './globals.css';
 import './sections.css';
 import YandexMetrika from '@/components/YandexMetrika';
+import LazyFonts from '@/components/LazyFonts';
 import { BRAND, HOME_DESCRIPTION, HOME_TITLE, KEYWORDS, SITE_URL } from '@/lib/seo';
 
 const verification: Metadata['verification'] = {};
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <YandexMetrika />
+        <LazyFonts />
       </body>
     </html>
   );

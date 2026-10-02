@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react';
-import { SERVICES, SITES } from '@/lib/data';
+import { SERVICES, SCREEN_SITES } from '@/lib/data';
 import Link from 'next/link';
 import Devices3D from './Devices3D';
 import { servicePageById } from '@/lib/services-content';
 import { ArrowRight } from './Icons';
+import { Doodle, Note } from './Doodle';
 
 const svg = (children: ReactNode) => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{children}</svg>
@@ -34,8 +35,9 @@ export default function Automation() {
 
       <div className="auto-box">
         <div className="grid" aria-hidden="true" />
-        <div className="auto-stage"><Devices3D mode="automation" sites={SITES} startId="napor"
+        <div className="auto-stage"><Devices3D mode="automation" sites={SCREEN_SITES} startId="briz"
           poster={{ desktop: '/brand/auto-poster.webp', mobile: '/brand/auto-poster-m.webp', alt: 'Админ-панель заявок, Telegram-бот и ноутбук' }} /></div>
+        <Note className="auto-note hide-m" rot={-4} arrow="arrowDown" arrowStyle={{ width: 30, marginTop: 2 }}>заявка долетает за секунду</Note>
         <div className="flow">
           {nodes.map((n) => (
             <div key={n.label} className="flow-node" style={{ flex: n.flex }}>

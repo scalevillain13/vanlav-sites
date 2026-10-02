@@ -1,6 +1,7 @@
 'use client';
 import { useState, type FormEvent } from 'react';
 import { CONTACT, NICHES } from '@/lib/data';
+import { Doodle, Note } from './Doodle';
 
 type Props = {
   anchor?: string; title?: string; text?: string; button?: string;
@@ -55,6 +56,9 @@ export default function CTA({
             <span><small>Пишите в Telegram</small><b>{CONTACT.telegram}</b></span>
           </a>
         </div>
+        <Doodle kind="arrow" className="cta-arrow" />
+        <span className="cta-hand hand" aria-hidden="true">отвечу сегодня</span>
+        <Doodle kind="star" className="cta-star" />
         <div className="cta-form-wrap">
           {!sent ? (
             <form onSubmit={submit} className="cta-form" noValidate>

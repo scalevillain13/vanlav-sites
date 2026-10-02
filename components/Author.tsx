@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { AUTHOR, CONTACT, SITES, SERVICES, EXPERIENCE, STACK } from '@/lib/data';
 import { ArrowUpRight } from './Icons';
+import { Doodle, Note } from './Doodle';
 
 const ROLES = ['Дизайн', 'Вёрстка и код', 'Тексты', 'SEO', 'Безопасность', 'Боты и админки'];
 const COLORS = ['#FF5A1F', '#FF7843', '#FF9A70', '#F1EEE7', '#C9C5BB', '#8E8A80'];
@@ -108,6 +109,7 @@ export default function Author() {
           <div className="author-text">
             <span className="label">Обо мне</span>
             <h2 className="author-h">Привет, я <span>{a.name}</span></h2>
+            <Note className="author-note hide-m" rot={-8} arrow="arrow" arrowStyle={{ width: 64, transform: 'scaleX(-1) rotate(20deg)' }}>это я делаю ваш сайт</Note>
             <p className="author-bio">Мне {a.age} лет, живу в {a.city}, в веб-разработке {a.experienceYears} года. Начинал в 2022 с фронтенда, с 2024 освоил бэкенд и стал fullstack-разработчиком. Ванлав — моя студия разработки сайтов: делаю сайты с нуля на заказ и готовые решения, и всем в ней я занимаюсь один: дизайн, вёрстка, тексты, SEO, защита, запуск, а также админ-панели и Telegram-боты для заявок. Вы общаетесь напрямую с тем, кто делает ваш сайт.</p>
             <p className="author-bio" style={{ color: 'var(--muted)' }}>Заодно этот сайт — моё небольшое портфолио: ниже стек, которым пользуюсь, и ссылка на GitHub с кодом.</p>
             <div className="skills">
@@ -124,7 +126,7 @@ export default function Author() {
             </div>
             <div className="btn-row" style={{ marginTop: 6 }}>
               <a href={CONTACT.telegramUrl} target="_blank" rel="noopener" className="btn btn-accent btn-icon">Написать {CONTACT.telegram} <span className="ic"><ArrowUpRight /></span></a>
-              <a href={a.githubUrl} target="_blank" rel="noopener" className="btn btn-outline"><GithubIcon /> GitHub</a>
+              <a href={a.githubUrl} target="_blank" rel="noopener" className="btn btn-outline gh-btn"><GithubIcon /> GitHub<Note className="gh-note hide-m" rot={6}>код — тут</Note></a>
               <a href={CONTACT.phoneHref} className="btn btn-outline">{CONTACT.phone}</a>
             </div>
           </div>

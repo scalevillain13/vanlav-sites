@@ -17,6 +17,7 @@ import Faq from '@/components/Faq';
 import Anatomy from '@/components/Anatomy';
 import Speed from '@/components/Speed';
 import Shots from '@/components/Shots';
+import Pains from '@/components/Pains';
 import JsonLd from '@/components/JsonLd';
 import { HOME_FAQ } from '@/lib/services-content';
 import { homeLd } from '@/lib/seo';
@@ -30,6 +31,7 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee />
+        <Pains />
         <Author />
         <Showcase3D />
         <div data-reveal=""><Catalog /></div>

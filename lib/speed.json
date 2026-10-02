@@ -1,0 +1,40 @@
+{
+ "scores": {
+  "performance": 99,
+  "accessibility": 100,
+  "best-practices": 100,
+  "seo": 100
+ },
+ "vitals": {
+  "fcp": 0.62,
+  "lcp": 0.99,
+  "tbt": 0,
+  "cls": 0.0
+ },
+ "frames": [
+  {
+   "t": 375,
+   "src": "/speed/f0.webp"
+  },
+  {
+   "t": 750,
+   "src": "/speed/f1.webp"
+  },
+  {
+   "t": 1125,
+   "src": "/speed/f2.webp"
+  },
+  {
+   "t": 1500,
+   "src": "/speed/f3.webp"
+  },
+  {
+   "t": 1875,
+   "src": "/speed/f4.webp"
+  },
+  {
+   "t": 2250,
+   "src": "/speed/f5.webp"
+  }
+ ]
+}

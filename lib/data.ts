@@ -146,6 +146,24 @@ const RAW_SITES: RawSite[] = [
       contactTitle: 'Закажите уборку', contactSub: 'Назовём цену по фото',
     },
   },
+  // Живой сайт — https://beauty-chi-ochre.vercel.app/
+  {
+    id: 'lume', title: 'Lumé Studio', niche: 'Косметология и уход', group: 'Красота',
+    description: 'Сайт студии эстетики и косметологии: направления ухода, мастера, подбор процедуры, абонементы и онлайн-запись в несколько шагов.',
+    tagline: 'Готовый сайт для студии красоты и косметологии',
+    price: PRICES.ready.from, image: '/sites/lume/full.jpg', imageH: 11930, cover: '/sites/lume/cover.jpg', coverH: 805, demoUrl: 'https://beauty-chi-ochre.vercel.app/', domain: 'beauty-chi-ochre.vercel.app',
+    preview: {
+      variant: 'split', bg: '#F5EFE7', ink: '#1A1614', muted: '#6A6258', accent: '#6E4A33', accentInk: '#FFFFFF',
+      panel: '#1A1614', panelInk: '#F5EFE7', surface: '#FFFFFF', line: '#E3DBCF', serif: true, weight: 500,
+      brand: 'Lumé Studio', phone: '+7 (495) 000-00-00', nav: ['Услуги', 'Косметика', 'Мастера', 'Абонементы'],
+      eyebrow: 'Эстетика · косметология', headline: 'Красота, которую замечают',
+      sub: 'Авторские уходы для лица и тела, архитектура бровей и колористика. Девять мастеров, один стандарт качества.',
+      cta: 'Записаться', cta2: 'Прайс', points: ['Диагностика кожи', 'Подбор ухода', 'Абонементы'],
+      panelLabel: 'Онлайн-запись', badge: '24/7', badgeCaption: 'Запись на ближайшее свободное время',
+      services: ['Лицо', 'Брови и ресницы', 'Волосы', 'Ногти'],
+      contactTitle: 'Запишитесь онлайн', contactSub: 'Процедура, мастер, дата и время — за 30 секунд',
+    },
+  },
   {
     id: 'autopro', title: 'AutoPro', niche: 'Автосервис', group: 'Авто',
     description: 'Сайт автосервиса с услугами, записью на ремонт и контактами.',
@@ -298,24 +316,6 @@ const RAW_SITES: RawSite[] = [
       contactTitle: 'Получите подборку', contactSub: 'Расскажите, что ищете',
     },
   },
-  // Живой сайт — https://beauty-chi-ochre.vercel.app/
-  {
-    id: 'lume', title: 'Lumé Studio', niche: 'Косметология и уход', group: 'Красота',
-    description: 'Сайт студии эстетики и косметологии: направления ухода, мастера, подбор процедуры, абонементы и онлайн-запись в несколько шагов.',
-    tagline: 'Готовый сайт для студии красоты и косметологии',
-    price: PRICES.ready.from, image: '/sites/lume/full.jpg', imageH: 11930, cover: '/sites/lume/cover.jpg', coverH: 805, demoUrl: 'https://beauty-chi-ochre.vercel.app/', domain: 'beauty-chi-ochre.vercel.app',
-    preview: {
-      variant: 'split', bg: '#F5EFE7', ink: '#1A1614', muted: '#6A6258', accent: '#6E4A33', accentInk: '#FFFFFF',
-      panel: '#1A1614', panelInk: '#F5EFE7', surface: '#FFFFFF', line: '#E3DBCF', serif: true, weight: 500,
-      brand: 'Lumé Studio', phone: '+7 (495) 000-00-00', nav: ['Услуги', 'Косметика', 'Мастера', 'Абонементы'],
-      eyebrow: 'Эстетика · косметология', headline: 'Красота, которую замечают',
-      sub: 'Авторские уходы для лица и тела, архитектура бровей и колористика. Девять мастеров, один стандарт качества.',
-      cta: 'Записаться', cta2: 'Прайс', points: ['Диагностика кожи', 'Подбор ухода', 'Абонементы'],
-      panelLabel: 'Онлайн-запись', badge: '24/7', badgeCaption: 'Запись на ближайшее свободное время',
-      services: ['Лицо', 'Брови и ресницы', 'Волосы', 'Ногти'],
-      contactTitle: 'Запишитесь онлайн', contactSub: 'Процедура, мастер, дата и время — за 30 секунд',
-    },
-  },
 ];
 
 const MOCK_H = MOCK_PREVIEWS as Record<string, number>;
@@ -330,6 +330,9 @@ export const SITES: Site[] = RAW_SITES.map((s) => ({
   demo: s.demoUrl || '/templates/' + s.id + '/demo',
   live: !!s.demoUrl,
 }));
+
+/** Что крутится на экранах 3D-ноутбуков: сначала живые сайты (Бриз, Lumé), Напор не показываем */
+export const SCREEN_SITES: Site[] = SITES.filter((s) => s.id !== 'napor').sort((a, b) => Number(b.live) - Number(a.live));
 
 export const NICHES = Array.from(new Set(SITES.map((s) => s.niche))).concat(['Другая ниша']);
 

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { SERVICES } from '@/lib/data';
 import { servicePageById } from '@/lib/services-content';
 import { useSeen } from './useSeen';
+import { Doodle, Note } from './Doodle';
 
 export default function Services() {
   const [ref, seen] = useSeen<HTMLElement>(0.2);
@@ -13,6 +14,7 @@ export default function Services() {
         <div>
           <span className="label">Услуги</span>
           <h2 className="h2">Сайты полностью с нуля на заказ</h2>
+          <Note className="svc-note hide-m" rot={-5}>цены честные — «от», без сюрпризов</Note>
         </div>
         <p className="lead">Разрабатываю сайты с нуля под вашу задачу: структура, уникальный дизайн, вёрстка, тексты и запуск — без шаблонов. Также логотипы, SEO, защита сайта, админ-панели и Telegram-боты. Цены стартовые — итог зависит от задачи.</p>
       </div>

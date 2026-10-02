@@ -42,3 +42,4 @@
 /* Запасные шрифты с подогнанными метриками: пока грузится основной шрифт, текст занимает то же место — без прыжков вёрстки (CLS) */
 @font-face { font-family: 'Unbounded Fallback'; src: local('Arial'), local('Helvetica Neue'), local('Helvetica'), local('Roboto'); size-adjust: 128.89%; ascent-override: 77.19%; descent-override: 19.01%; line-gap-override: 0%; }
 @font-face { font-family: 'Onest Fallback'; src: local('Arial'), local('Helvetica Neue'), local('Helvetica'), local('Roboto'); size-adjust: 104.11%; ascent-override: 93.17%; descent-override: 29.3%; line-gap-override: 0%; }
+

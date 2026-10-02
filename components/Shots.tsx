@@ -1,96 +1,85 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import { SITES } from '@/lib/data';
+import { Doodle, Note } from './Doodle';
+import { ArrowUpRight } from './Icons';
 
-// Кадры — фрагменты реальных экранов живых сайтов из каталога
-const SHOTS = [
-  { src: 'lume-hero', site: 'lume', title: 'Lumé Studio', what: 'Первый экран', w: 580, h: 776 },
-  { src: 'napor-pipe', site: 'napor', title: 'НАПОР', what: 'Если течёт прямо сейчас', w: 862, h: 708, kind: 'wide' },
-  { src: 'briz-hero', site: 'briz', title: 'Бриз', what: 'Первый экран', w: 256, h: 290, kind: 'tall' },
-  { src: 'lume-master', site: 'lume', title: 'Lumé Studio', what: 'Мастера', w: 554, h: 738 },
-  { src: 'napor-master', site: 'napor', title: 'НАПОР', what: 'Мастера в штате', w: 800, h: 626, kind: 'wide' },
-  { src: 'briz-room', site: 'briz', title: 'Бриз', what: 'Объекты за месяц', w: 340, h: 382, kind: 'tall' },
-  { src: 'lume-before', site: 'lume', title: 'Lumé Studio', what: 'Слайдер «до и после»', w: 866, h: 981 },
-  { src: 'napor-tools', site: 'napor', title: 'НАПОР', what: 'Оборудование мастера', w: 668, h: 596, kind: 'wide' },
-  { src: 'briz-team', site: 'briz', title: 'Бриз', what: 'Команда', w: 260, h: 320, kind: 'tall' },
-  { src: 'lume-mask', site: 'lume', title: 'Lumé Studio', what: 'Галерея студии', w: 423, h: 530 },
-  { src: 'lume-oil', site: 'lume', title: 'Lumé Studio', what: 'Косметика', w: 422, h: 315, kind: 'wide' },
-];
+// Что реально есть на каждом живом сайте (по их экранам)
+const FEATURES: Record<string, { lead: string; items: string[]; note: string }> = {
+  briz: {
+    lead: 'Клининг в Сочи и Адлере. Свежий светлый сайт с акцентом на цены и реальные объекты.',
+    items: ['Цены по видам уборки', 'Слайдер «до и после»', 'Объекты за месяц и команда', 'Сертификаты и отзывы', 'Карта и контакты'],
+    note: 'цена — сразу на первом экране',
+  },
+  lume: {
+    lead: 'Студия эстетики. Спокойная премиальная подача, много фото и запись в пару кликов.',
+    items: ['Направления с прайсом', 'Подбор ухода за 3 вопроса', 'Слайдер «до и после»', 'Абонементы', 'Онлайн-запись: процедура, мастер, дата'],
+    note: 'квиз сам подбирает процедуру',
+  },
+  napor: {
+    lead: 'Аварийная сантехника. Строгий «инженерный» стиль и всё, чтобы вызвать мастера за минуту.',
+    items: ['Интерактивный план квартиры', 'Цены до выезда мастера', 'Мастера и оборудование', 'Гарантийный талон', 'Зона выезда на карте'],
+    note: 'нажимаешь на точку — видишь цену',
+  },
+};
+const ORDER = ['briz', 'lume', 'napor'];
 
 export default function Shots() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const footRef = useRef<HTMLDivElement>(null);
-
+  const rootRef = useRef<HTMLElement>(null);
+  // прокрутка скриншотов идёт только пока окно видно на экране
   useEffect(() => {
-    const track = trackRef.current; if (!track) return;
-    const cards = Array.from(track.querySelectorAll<HTMLElement>('.shot-card'));
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let raf = 0;
-    // наклон и параллакс внутри кадра зависят от положения карточки относительно центра ленты
-    const update = () => {
-      raf = 0;
-      const vw = track.clientWidth, c = vw / 2;
-      if (!still) cards.forEach((el) => {
-        const r = el.offsetLeft - track.scrollLeft + el.offsetWidth / 2;
-        const d = Math.max(-1.2, Math.min(1.2, (r - c) / vw));
-        el.style.setProperty('--ry', (-d * 10).toFixed(2) + 'deg');
-        el.style.setProperty('--px', (-d * 7).toFixed(2) + '%');
-      });
-      const max = track.scrollWidth - vw;
-      footRef.current?.style.setProperty('--p', String(max > 0 ? track.scrollLeft / max : 0));
-    };
-    const req = () => { if (!raf) raf = requestAnimationFrame(update); };
-
-    // мышью ленту можно тянуть (на телефоне она листается пальцем сама)
-    let down = false, moved = false, sx = 0, sl = 0;
-    const onDown = (e: PointerEvent) => { if (e.pointerType !== 'mouse' || e.button !== 0) return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; };
-    const onMove = (e: PointerEvent) => {
-      if (!down) return;
-      const dx = e.clientX - sx;
-      if (!moved && Math.abs(dx) > 5) { moved = true; track.classList.add('drag'); }
-      if (moved) track.scrollLeft = sl - dx;
-    };
-    const onUp = () => { if (!down) return; down = false; track.classList.remove('drag'); };
-    const onClick = (e: MouseEvent) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } };
-
-    track.addEventListener('scroll', req, { passive: true });
-    window.addEventListener('resize', req);
-    track.addEventListener('pointerdown', onDown);
-    window.addEventListener('pointermove', onMove);
-    window.addEventListener('pointerup', onUp);
-    track.addEventListener('click', onClick, true);
-    update();
-    return () => {
-      cancelAnimationFrame(raf);
-      track.removeEventListener('scroll', req); window.removeEventListener('resize', req);
-      track.removeEventListener('pointerdown', onDown); window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp);
-      track.removeEventListener('click', onClick, true);
-    };
+    const els = Array.from(rootRef.current?.querySelectorAll<HTMLElement>('.lw-view') || []);
+    const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('run', e.isIntersecting)), { rootMargin: '0px 0px -10% 0px' });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
   }, []);
 
+  const sites = ORDER.map((id) => SITES.find((s) => s.id === id)).filter(Boolean) as typeof SITES;
+
   return (
-    <section id="shots" className="shots" aria-labelledby="shots-h">
-      <div className="shots-head sec-head">
+    <section id="shots" ref={rootRef} className="section live" aria-labelledby="shots-h">
+      <div className="sec-head">
         <div>
-          <span className="label">Кадры из проектов</span>
+          <span className="label">Портфолио</span>
           <h2 id="shots-h" className="h2">Живые сайты крупным планом</h2>
         </div>
-        <p className="lead">Фрагменты трёх сайтов, которые уже работают. Листайте ленту — каждый кадр ведёт на страницу проекта.</p>
+        <p className="lead">Три сайта, которые уже работают. Окна прокручиваются сами — наведите курсор, чтобы остановить и рассмотреть.</p>
       </div>
-      <div ref={trackRef} className="shots-track">
-        {SHOTS.map((s) => (
-          <Link key={s.src} href={'/templates/' + s.site} className={'shot-card' + (s.kind ? ' ' + s.kind : '')} draggable={false}>
-            <figure style={{ margin: 0 }}>
-              <div className="shot-frame">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={'/shots/' + s.src + '.webp'} alt={`${s.title}: ${s.what.toLowerCase()}`} width={s.w} height={s.h} loading="lazy" decoding="async" draggable={false} />
+
+      <div className="live-list">
+        {sites.map((s, i) => {
+          const f = FEATURES[s.id];
+          const dur = Math.round(((s.imageH || 4000) / 1280) * 5.2);
+          return (
+            <article key={s.id} className={'live-row' + (i % 2 ? ' flip' : '')}>
+              <div className="lw">
+                <div className="lw-bar">
+                  <span className="dots"><i /><i /><i /></span>
+                  <span className="lw-url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>{s.domain}</span>
+                  <span />
+                </div>
+                <div className="lw-view" style={{ ['--dur' as string]: dur + 's', ['--bg' as string]: s.preview.bg }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={s.image.replace(/\.jpe?g$/, '.webp')} alt={`${s.title} — сайт целиком`} width={1280} height={s.imageH} loading="lazy" decoding="async" />
+                </div>
+                <Note className={'lw-note hide-m ' + (i % 2 ? 'l' : 'r')} rot={i % 2 ? -5 : 4} arrow={i % 2 ? 'arrow' : 'loop'} arrowStyle={{ width: 76, transform: i % 2 ? 'scaleX(-1) rotate(-20deg)' : 'scaleX(-1) rotate(40deg)' }}>{f.note}</Note>
               </div>
-              <figcaption><b>{s.title}</b><span>{s.what}</span></figcaption>
-            </figure>
-          </Link>
-        ))}
+              <div className="lw-info">
+                <span className="lw-n">{String(i + 1).padStart(2, '0')}<small>/ 0{sites.length}</small></span>
+                <span className="lw-niche">{s.niche}</span>
+                <h3>{s.title}</h3>
+                <p>{f.lead}</p>
+                <ul>{f.items.map((it, k) => <li key={it}><Doodle kind="check" delay={k * 0.08} />{it}</li>)}</ul>
+                <div className="lw-act">
+                  <a href={s.demoUrl} target="_blank" rel="noopener" className="btn btn-accent btn-icon">Открыть сайт <span className="ic"><ArrowUpRight /></span></a>
+                  <Link href={s.url} className="btn btn-outline">Подробнее</Link>
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
-      <div ref={footRef} className="shots-foot"><span>{SHOTS.length} кадров</span><div className="shots-bar"><i /></div></div>
     </section>
   );
 }

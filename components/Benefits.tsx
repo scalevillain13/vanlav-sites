@@ -1,6 +1,7 @@
 'use client';
 import type { ReactNode } from 'react';
 import { useSeen } from './useSeen';
+import { Doodle, Note } from './Doodle';
 
 const STAGES = ['Структура', 'Дизайн', 'Вёрстка', 'Адаптив', 'Контент', 'Запуск'];
 const ICON = { new: '○', ready: '✓', adapt: '↺' } as const;
@@ -27,6 +28,7 @@ export default function Benefits() {
         <div>
           <span className="label">Преимущества</span>
           <h2 className="h2">С нуля или на готовой основе?</h2>
+          <Note className="ben-note hide-m" rot={5}>оба варианта — у меня</Note>
         </div>
         <p className="lead" style={{ maxWidth: 480 }}>Сайт с нуля — полностью под вашу задачу. Готовый — когда важны сроки и бюджет: большая часть этапов уже пройдена, остаётся адаптировать и запустить.</p>
       </div>
