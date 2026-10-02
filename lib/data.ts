@@ -35,6 +35,8 @@ export type Site = RawSite & { priceLabel: string; url: string; demo: string; li
 export const CONTACT = {
   telegram: '@h4r4dex',
   telegramUrl: 'https://t.me/h4r4dex',
+  phone: '+7 988 501-54-84',
+  phoneHref: 'tel:+79885015484',
 };
 
 // Об авторе. photo — путь к фото в /public (например '/author.jpg'); пусто — заглушка
@@ -45,7 +47,19 @@ export const AUTHOR = {
   startYear: 2022,
   city: 'Сочи',
   photo: '',
+  github: 'scalevillain13',
+  githubUrl: 'https://github.com/scalevillain13',
 };
+
+// Путь в разработке: год → что осваивал. Используется в блоке «Обо мне» как таймлайн.
+export const EXPERIENCE = [
+  { year: 2022, title: 'Начал во фронтенде', text: 'HTML, CSS, JavaScript, вёрстка и первые интерфейсы' },
+  { year: 2024, title: 'Перешёл к бэкенду', text: 'Серверная логика, базы данных, API' },
+  { year: 2026, title: 'Fullstack-разработчик', text: 'Веду проект от дизайна и фронтенда до бэкенда и сервера' },
+];
+
+// Основной стек — показывается в блоке «Обо мне» как часть портфолио
+export const STACK = ['HTML', 'CSS', 'Tailwind', 'Git', 'Docker', 'Vite', 'Redis', 'Kubernetes', 'PHP', 'React', 'TypeScript', 'Node.js', 'Laravel', 'MySQL', 'PostgreSQL'];
 
 export const formatPrice = (n: number) =>
   'от ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽';

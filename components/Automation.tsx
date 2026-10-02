@@ -1,9 +1,19 @@
+import type { ReactNode } from 'react';
 import { SERVICES, SITES } from '@/lib/data';
 import Link from 'next/link';
 import Devices3D from './Devices3D';
 import { servicePageById } from '@/lib/services-content';
+import { ArrowRight } from './Icons';
 
-const ICONS: Record<string, string> = { tgbot: '✉', bots: '⚙', admin: '▦' };
+const svg = (children: ReactNode) => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{children}</svg>
+);
+// Бумажный самолётик (заявки прилетают в Telegram), значок бота, панель администратора
+const ICONS: Record<string, ReactNode> = {
+  tgbot: svg(<><path d="M21 4 10.5 14.5" /><path d="M21 4 14.5 21l-4-6.5L4 10.5z" /></>),
+  bots: svg(<><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 8V4" /><circle cx="12" cy="3" r="1.3" fill="currentColor" stroke="none" /><circle cx="9" cy="14" r="1.3" fill="currentColor" stroke="none" /><circle cx="15" cy="14" r="1.3" fill="currentColor" stroke="none" /><path d="M8 19v1.5" /><path d="M16 19v1.5" /></>),
+  admin: svg(<><rect x="3.5" y="4" width="17" height="16" rx="2.5" /><path d="M3.5 9.5h17" /><path d="M8 14h2" /><path d="M8 17h5" /></>),
+};
 
 export default function Automation() {
   const list = SERVICES.filter((s) => s.auto);
@@ -46,8 +56,8 @@ export default function Automation() {
           </Link>
         ))}
       </div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
-        <a href="#contact" className="btn btn-accent btn-icon">Обсудить бота или админку <span className="ic">→</span></a>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+        <a href="#contact" className="btn btn-accent btn-icon">Обсудить бота или админку <span className="ic"><ArrowRight /></span></a>
       </div>
     </section>
   );

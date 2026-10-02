@@ -1,10 +1,19 @@
 'use client';
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
-import { AUTHOR, CONTACT, SITES, SERVICES } from '@/lib/data';
+import { AUTHOR, CONTACT, SITES, SERVICES, EXPERIENCE, STACK } from '@/lib/data';
+import { ArrowUpRight } from './Icons';
 
 const ROLES = ['Дизайн', 'Вёрстка и код', 'Тексты', 'SEO', 'Безопасность', 'Боты и админки'];
 const COLORS = ['#FF5A1F', '#FF7843', '#FF9A70', '#F1EEE7', '#C9C5BB', '#8E8A80'];
 const SKILLS = ['Сайты-визитки', 'Лендинги с нуля', 'Сайты на заказ', 'Дизайн сайтов', 'Логотипы', 'SEO', 'Веб-безопасность', 'Админ-панели', 'Telegram-боты'];
+
+function GithubIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.05 3.29 9.33 7.85 10.84.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.12 3.06.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.79.55A10.53 10.53 0 0 0 23.5 12c0-6.3-5.23-11.5-11.5-11.5Z" />
+    </svg>
+  );
+}
 
 export default function Author() {
   const rootRef = useRef<HTMLElement>(null);
@@ -54,7 +63,6 @@ export default function Author() {
 
   const a = AUTHOR;
   const C = 2 * Math.PI * 96, seg = C / ROLES.length;
-  const years: number[] = []; for (let y = a.startYear; y <= a.startYear + a.experienceYears; y++) years.push(y);
   const chips = [
     { value: a.age + ' лет', label: 'возраст', x: '-2%', y: '12%', z: 120, acc: false },
     { value: a.experienceYears + ' года', label: 'в веб-разработке', x: '68%', y: '4%', z: 160, acc: true },
@@ -100,16 +108,24 @@ export default function Author() {
           <div className="author-text">
             <span className="label">Обо мне</span>
             <h2 className="author-h">Привет, я <span>{a.name}</span></h2>
-            <p className="author-bio">Мне {a.age} лет, живу в {a.city}, в веб-разработке {a.experienceYears} года. Ванлав — моя студия разработки сайтов: делаю сайты с нуля на заказ и готовые решения, и всем в ней я занимаюсь один: дизайн, вёрстка, тексты, SEO, защита, запуск, а также админ-панели и Telegram-боты для заявок. Вы общаетесь напрямую с тем, кто делает ваш сайт.</p>
+            <p className="author-bio">Мне {a.age} лет, живу в {a.city}, в веб-разработке {a.experienceYears} года. Начинал в 2022 с фронтенда, с 2024 освоил бэкенд и стал fullstack-разработчиком. Ванлав — моя студия разработки сайтов: делаю сайты с нуля на заказ и готовые решения, и всем в ней я занимаюсь один: дизайн, вёрстка, тексты, SEO, защита, запуск, а также админ-панели и Telegram-боты для заявок. Вы общаетесь напрямую с тем, кто делает ваш сайт.</p>
+            <p className="author-bio" style={{ color: 'var(--muted)' }}>Заодно этот сайт — моё небольшое портфолио: ниже стек, которым пользуюсь, и ссылка на GitHub с кодом.</p>
             <div className="skills">
               <span>Что делаю:</span>
               <div>
                 {SKILLS.map((s, i) => <span key={s} className="chip skill" style={{ transitionDelay: (0.4 + i * 0.07) + 's' }}><i>✦</i>{s}</span>)}
               </div>
             </div>
+            <div className="skills">
+              <span>Стек:</span>
+              <div>
+                {STACK.map((s, i) => <span key={s} className="chip skill" style={{ transitionDelay: (0.4 + i * 0.05) + 's' }}><i>✦</i>{s}</span>)}
+              </div>
+            </div>
             <div className="btn-row" style={{ marginTop: 6 }}>
-              <a href={CONTACT.telegramUrl} target="_blank" rel="noopener" className="btn btn-accent btn-icon">Написать {CONTACT.telegram} <span className="ic">↗</span></a>
-              <a href="#services" className="btn btn-outline">Услуги и цены</a>
+              <a href={CONTACT.telegramUrl} target="_blank" rel="noopener" className="btn btn-accent btn-icon">Написать {CONTACT.telegram} <span className="ic"><ArrowUpRight /></span></a>
+              <a href={a.githubUrl} target="_blank" rel="noopener" className="btn btn-outline"><GithubIcon /> GitHub</a>
+              <a href={CONTACT.phoneHref} className="btn btn-outline">{CONTACT.phone}</a>
             </div>
           </div>
         </div>
@@ -143,8 +159,8 @@ export default function Author() {
             <div className="timeline-head"><b>{a.experienceYears} года в веб-разработке</b><span>{a.city}</span></div>
             <div className="tl-bar"><div /></div>
             <div className="tl-years">
-              {years.map((y, i) => (
-                <div key={y}><b>{y}</b><small>{i === 0 ? 'Начало в веб-разработке' : i === years.length - 1 ? 'Студия Ванлав' : ''}</small></div>
+              {EXPERIENCE.map((e) => (
+                <div key={e.year}><b>{e.year}</b><small>{e.title}</small></div>
               ))}
             </div>
           </div>

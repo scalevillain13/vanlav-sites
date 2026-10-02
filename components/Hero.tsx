@@ -1,6 +1,7 @@
 import { preload } from 'react-dom';
 import Devices3D from './Devices3D';
 import { AUTHOR, SITES, PRICES, formatPrice } from '@/lib/data';
+import { ArrowRight } from './Icons';
 
 export default function Hero() {
   // постер 3D-сцены — самый крупный элемент первого экрана (LCP): грузим с высоким приоритетом
@@ -24,7 +25,7 @@ export default function Hero() {
           <div className="hero-left">
             <p className="hero-sub">Делаю сайты полностью с нуля на заказ — от идеи и дизайна до запуска. Нужно быстрее и дешевле — адаптирую готовый сайт из каталога под вашу компанию.</p>
             <div className="btn-row">
-              <a href="#contact" className="btn btn-accent btn-icon">Заказать сайт <span className="ic">→</span></a>
+              <a href="#contact" className="btn btn-accent btn-icon">Заказать сайт <span className="ic"><ArrowRight /></span></a>
               <a href="#catalog" className="btn btn-outline">Смотреть готовые сайты</a>
             </div>
             <a href="#about" className="author-pill">
