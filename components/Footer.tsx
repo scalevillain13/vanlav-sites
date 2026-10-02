@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { CONTACT, SERVICES } from '@/lib/data';
 import { SERVICE_PAGES } from '@/lib/services-content';
+import { NICHES } from '@/lib/niche-content';
 
 export default function Footer({ base = '' }: { base?: string }) {
   const links = [
@@ -25,6 +26,11 @@ export default function Footer({ base = '' }: { base?: string }) {
           <nav aria-label="Услуги">
             {SERVICE_PAGES.slice(0, 6).map((p) => <Link key={p.slug} href={'/uslugi/' + p.slug}>{SERVICES.find((s) => s.id === p.id)?.title}</Link>)}
             <Link href="/uslugi">Все услуги →</Link>
+          </nav>
+          <nav aria-label="Сайты для ниш">
+            {NICHES.slice(0, 6).map((n) => <Link key={n.slug} href={'/sajt-dlya/' + n.slug}>{n.h1.replace(/^Сайт для /, 'Сайт для ')}</Link>)}
+            <Link href="/sajt-dlya">Все ниши →</Link>
+            <Link href="/blog">Блог о сайтах →</Link>
           </nav>
           <a href={CONTACT.telegramUrl} target="_blank" rel="noopener" className="footer-tg">
             <small>Основной способ связи — Telegram</small>

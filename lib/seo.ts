@@ -1,5 +1,7 @@
 import { AUTHOR, CONTACT, PRICES, SERVICES, SITES } from './data';
 import { HOME_FAQ, SERVICE_PAGES, type Faq } from './services-content';
+import type { Niche } from './niche-content';
+import type { Article } from './blog-content';
 
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -125,6 +127,52 @@ export function templateLd(site: (typeof SITES)[number]) {
         offers: { '@type': 'Offer', price: site.price, priceCurrency: 'RUB', url: abs(site.url), availability: 'https://schema.org/InStock' },
       },
       breadcrumbsLd([{ name: 'Главная', path: '/' }, { name: 'Готовые сайты', path: '/#catalog' }, { name: site.title, path: site.url }]),
+      organizationLd(),
+    ],
+  };
+}
+
+export function nicheLd(n: Niche, path: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        name: n.h1,
+        description: n.metaDescription,
+        url: abs(path),
+        serviceType: 'Разработка сайта',
+        audience: { '@type': 'BusinessAudience', name: n.name },
+        provider: { '@id': ORG_ID },
+        areaServed: [{ '@type': 'City', name: CITY }, { '@type': 'Country', name: 'Россия' }],
+        offers: { '@type': 'Offer', price: PRICES.ready.from, priceCurrency: 'RUB', url: abs(path), availability: 'https://schema.org/InStock' },
+      },
+      breadcrumbsLd([{ name: 'Главная', path: '/' }, { name: 'Сайты по нишам', path: '/sajt-dlya' }, { name: n.name, path }]),
+      faqLd(n.faq),
+      organizationLd(),
+    ],
+  };
+}
+
+export function articleLd(a: Article, path: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        headline: a.title,
+        description: a.description,
+        url: abs(path),
+        mainEntityOfPage: abs(path),
+        datePublished: a.date,
+        dateModified: a.date,
+        inLanguage: 'ru-RU',
+        keywords: a.keywords.join(', '),
+        image: abs('/og.jpg'),
+        author: { '@type': 'Person', name: AUTHOR.name, url: abs('/#about'), sameAs: [AUTHOR.githubUrl] },
+        publisher: { '@id': ORG_ID },
+      },
+      breadcrumbsLd([{ name: 'Главная', path: '/' }, { name: 'Блог', path: '/blog' }, { name: a.title, path }]),
       organizationLd(),
     ],
   };

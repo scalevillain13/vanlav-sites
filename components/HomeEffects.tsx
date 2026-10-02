@@ -64,7 +64,9 @@ export default function HomeEffects({ cursor = true }: { cursor?: boolean }) {
     document.addEventListener('click', onAnchor, true);
     let idleId = 0;
     const idle = () => { const w = window as Window; idleId = typeof w.requestIdleCallback === 'function' ? w.requestIdleCallback(cvDone, { timeout: 4000 }) : setTimeout(cvDone, 2500) as unknown as number; };
-    if (document.readyState === 'complete') setTimeout(idle, 1500); else window.addEventListener('load', () => setTimeout(idle, 1500), { once: true });
+    // на телефоне всю страницу заранее не дорисовываем (это секунды работы процессора) — только по клику на якорь
+    const phone = window.matchMedia('(max-width: 899px), (pointer: coarse)').matches;
+    if (!phone) { if (document.readyState === 'complete') setTimeout(idle, 1500); else window.addEventListener('load', () => setTimeout(idle, 1500), { once: true }); }
     if (location.hash) cvDone();
 
     let io: IntersectionObserver | undefined;

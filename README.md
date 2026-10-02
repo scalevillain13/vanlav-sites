@@ -93,3 +93,14 @@ vercel --prod   # продакшн
 npm run build && npm start      # в одном окне
 npm run previews                # в другом (нужен установленный Chrome или CHROME_PATH)
 ```
+
+## Скриншоты живых сайтов
+
+Скриншоты, снятые «внахлёст», склеиваются без дублей и разрывов скриптом:
+
+```bash
+python3 scripts/stitch.py <id> <высота_шапки_px> кадр1.png кадр2.png …   # → public/sites/<id>/full.jpg, cover.jpg
+npm run slices                                                          # кадры для экрана 3D-ноутбука
+```
+
+Скрипт печатает `imageH` и `coverH` — их нужно вписать в `lib/data.ts`.

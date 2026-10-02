@@ -20,6 +20,9 @@ export default function Devices3D({ mode, sites, startId, className, poster, pri
     if (!host) return;
     let cleanup: (() => void) | undefined;
     let cancelled = false;
+    // На телефонах и планшетах WebGL не запускаем вовсе: показываем готовый кадр сцены (постер) —
+    // это экономит батарею, память и сотни миллисекунд работы процессора на старте.
+    if (window.matchMedia('(max-width: 899px), (pointer: coarse)').matches) return;
     import('@/lib/devices3d').then(({ mountDevices, canRun3D }) => {
       if (cancelled || !canRun3D()) return;
       cleanup = mountDevices(host, { mode, sites, startId, onReady: () => setReady(true) });

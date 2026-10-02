@@ -4,6 +4,7 @@ import { CATEGORIES, SITES } from '@/lib/data';
 import SiteCard from './SiteCard';
 import { Note } from './Doodle';
 import { GlowArrow, Sparkle } from './Glow';
+import Link from 'next/link';
 
 const FIRST = 6;
 // сначала живые сайты, потом демо-шаблоны
@@ -12,7 +13,7 @@ const ORDERED = [...SITES].sort((a, b) => Number(b.live) - Number(a.live));
 const plural = (n: number) =>
   n % 10 === 1 && n % 100 !== 11 ? 'шаблон' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'шаблона' : 'шаблонов';
 
-export default function Catalog() {
+export default function Catalog({ niches = [] }: { niches?: { slug: string; name: string }[] }) {
   const [active, setActive] = useState('Все');
   const [all, setAll] = useState(false);
   const list = active === 'Все' ? ORDERED : ORDERED.filter((s) => s.group === active);
@@ -61,6 +62,10 @@ export default function Catalog() {
           </button>
         </div>
       )}
+      <div className="cat-niches">
+        <span>Сайты для ниш:</span>
+        {niches.map((n) => <Link key={n.slug} href={'/sajt-dlya/' + n.slug}>{n.name}</Link>)}
+      </div>
     </section>
   );
 }

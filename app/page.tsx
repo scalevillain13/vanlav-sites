@@ -23,6 +23,7 @@ import { Divider } from '@/components/Glow';
 import JsonLd from '@/components/JsonLd';
 import { HOME_FAQ } from '@/lib/services-content';
 import { homeLd } from '@/lib/seo';
+import { NICHES } from '@/lib/niche-content';
 
 export default function Home() {
   return (
@@ -38,7 +39,7 @@ export default function Home() {
         <Divider />
         <Author />
         <Showcase3D />
-        <div data-reveal=""><Catalog /></div>
+        <div data-reveal=""><Catalog niches={NICHES.map((n) => ({ slug: n.slug, name: n.name }))} /></div>
         <Shots />
         <Divider mark="diamond" />
         <div data-reveal=""><Process /></div>

@@ -87,3 +87,11 @@
   .gc-new { filter: drop-shadow(0 0 5px var(--glow)); }
   .noise { display: none; }
 }
+
+/* телефоны: вместо WebGL — статичный кадр сцены, слегка «парит» */
+@media (max-width: 899px), (pointer: coarse) {
+  .devices-poster img { animation: vl-float 6s ease-in-out infinite; }
+  @keyframes vl-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+}
+@media (prefers-reduced-motion: reduce) { .devices-poster img { animation: none; } }
+/* телефоны: вместо WebGL — статичный постер сцены */

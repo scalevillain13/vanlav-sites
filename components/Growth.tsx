@@ -111,6 +111,7 @@ export default function Growth() {
           </div>
         ))}
       </div>
+      <p className="gr-more">Подробнее: <a href="/blog/pochemu-sajt-ne-prinosit-zayavki">почему сайт не приносит заявки</a> · <a href="/blog/skolko-stoit-sajt-dlya-biznesa">сколько стоит сайт для бизнеса</a> · <a href="/blog/seo-dlya-malogo-biznesa">SEO для малого бизнеса</a></p>
     </section>
   );
 }

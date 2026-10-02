@@ -10,6 +10,7 @@ import HomeEffects from '@/components/HomeEffects';
 import JsonLd from '@/components/JsonLd';
 import { templateLd } from '@/lib/seo';
 import { PRICES, SITES, findSite } from '@/lib/data';
+import { NICHES } from '@/lib/niche-content';
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const site = findSite(id);
   if (!site) return {};
   const price = site.priceLabel.replace(/\u00A0/g, ' ');
-  const title = `${site.tagline} «${site.title}» — ${price}`;
+  const title = site.live ? `${site.tagline} «${site.title}» — живой пример, ${price}` : `${site.tagline} «${site.title}» — ${price}`;
   const description = `${site.description} Адаптация под вашу компанию: тексты, логотип, цвета, контакты, мобильная версия. ${price}.`;
   const img = site.cover || site.image;
   return {
@@ -73,6 +74,7 @@ export default async function TemplatePage({ params }: Params) {
             <span className="eyebrow">{site.niche}{site.live && <span className="live-dot" style={{ textTransform: 'none', letterSpacing: 0 }}>Живой сайт</span>}</span>
             <h1 className="tpl-h1">{site.title}</h1>
             <p className="tpl-tagline">{site.tagline}</p>
+            {(() => { const n = NICHES.find((x) => x.templates.includes(site.id)); return n ? <Link href={'/sajt-dlya/' + n.slug} className="tpl-niche">Что должно быть на сайте — {n.name.toLowerCase()} →</Link> : null; })()}
           </div>
           <div>
             <div className="tpl-price"><b>{site.priceLabel}</b><span>с адаптацией под ваш бизнес</span></div>

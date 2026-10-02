@@ -76,10 +76,13 @@ export default function Pains() {
       if (st !== stepRef.current) { stepRef.current = st; setStep(st); }
     };
     const req = () => { if (!raf) raf = requestAnimationFrame(update); };
+    // анимации внутри старого сайта (бегущая строка, спиннер) крутятся, только пока секция на экране
+    const vio = new IntersectionObserver(([e]) => root.classList.toggle('live', e.isIntersecting));
+    vio.observe(root);
     window.addEventListener('scroll', req, { passive: true });
     window.addEventListener('resize', req);
     update();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', req); window.removeEventListener('resize', req); };
+    return () => { vio.disconnect(); cancelAnimationFrame(raf); window.removeEventListener('scroll', req); window.removeEventListener('resize', req); };
   }, []);
 
   const cur = step >= 1 && step <= N ? PAINS[step - 1] : null;
@@ -116,7 +119,10 @@ export default function Pains() {
                 <span className="dc-tag ok">Решение</span>
                 <h3>Новый сайт закрывает все шесть</h3>
                 <p>Современный дизайн, загрузка меньше секунды, удобно с телефона, цены на виду, заявки — сразу в Telegram, и всё это видно в поиске.</p>
-                <a href="#contact" className="btn btn-accent btn-icon">Хочу такой сайт <span className="ic"><ArrowRight /></span></a>
+                <div className="btn-row">
+                  <a href="#contact" className="btn btn-accent btn-icon">Хочу такой сайт <span className="ic"><ArrowRight /></span></a>
+                  <a href="/blog/pochemu-sajt-ne-prinosit-zayavki" className="btn btn-outline">9 причин, почему нет заявок</a>
+                </div>
               </>
             )}
           </div>

@@ -116,7 +116,7 @@ const RAW_SITES: RawSite[] = [
     id: 'napor', title: 'НАПОР', niche: 'Сантехника', group: 'Услуги',
     description: 'Сайт аварийной сантехнической службы: 3D-план квартиры, прайс-диапазоны и вызов мастера за 40 минут.',
     tagline: 'Готовый сайт для сантехнической службы',
-    price: PRICES.ready.from, image: '/sites/napor/full.jpg', imageH: 10390, cover: '/sites/napor/cover.jpg', coverH: 701, demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
+    price: PRICES.ready.from, image: '/sites/napor/full.jpg', imageH: 10016, cover: '/sites/napor/cover.jpg', coverH: 701, demoUrl: 'https://napor-landing.vercel.app/', domain: 'napor-landing.vercel.app',
     preview: {
       variant: 'split', bg: '#F3F3EF', ink: '#14171A', muted: '#4B5058', accent: '#3BB1DF', accentInk: '#FFFFFF',
       panel: '#14171A', panelInk: '#FFFFFF', surface: '#FFFFFF', line: '#DDDDD6',
@@ -134,7 +134,7 @@ const RAW_SITES: RawSite[] = [
     id: 'briz', title: 'Бриз', niche: 'Клининговые услуги', group: 'Услуги',
     description: 'Сайт клининговой компании: виды уборки с ценами, до/после, команда, отзывы и заявка в один клик.',
     tagline: 'Готовый сайт для клининговой компании',
-    price: PRICES.ready.from, image: '/sites/briz/full.jpg', imageH: 6289, cover: '/sites/briz/cover.jpg', coverH: 702, demoUrl: 'https://briz-inky.vercel.app/', domain: 'briz-inky.vercel.app',
+    price: PRICES.ready.from, image: '/sites/briz/full.jpg', imageH: 6005, cover: '/sites/briz/cover.jpg', coverH: 704, demoUrl: 'https://briz-inky.vercel.app/', domain: 'briz-inky.vercel.app',
     preview: {
       variant: 'stack', bg: '#F5F4EE', ink: '#13302A', muted: '#4A5A55', accent: '#D9F26B', accentInk: '#13302A',
       heroBg: '#F5F4EE', heroInk: '#13302A', heroMuted: '#4A5A55', heroLine: '#DDDCD4', surface: '#FFFFFF', line: '#DDDCD4',
@@ -151,7 +151,7 @@ const RAW_SITES: RawSite[] = [
     id: 'lume', title: 'Lumé Studio', niche: 'Косметология и уход', group: 'Красота',
     description: 'Сайт студии эстетики и косметологии: направления ухода, мастера, подбор процедуры, абонементы и онлайн-запись в несколько шагов.',
     tagline: 'Готовый сайт для студии красоты и косметологии',
-    price: PRICES.ready.from, image: '/sites/lume/full.jpg', imageH: 11930, cover: '/sites/lume/cover.jpg', coverH: 805, demoUrl: 'https://beauty-chi-ochre.vercel.app/', domain: 'beauty-chi-ochre.vercel.app',
+    price: PRICES.ready.from, image: '/sites/lume/full.jpg', imageH: 10630, cover: '/sites/lume/cover.jpg', coverH: 805, demoUrl: 'https://beauty-chi-ochre.vercel.app/', domain: 'beauty-chi-ochre.vercel.app',
     preview: {
       variant: 'split', bg: '#F5EFE7', ink: '#1A1614', muted: '#6A6258', accent: '#6E4A33', accentInk: '#FFFFFF',
       panel: '#1A1614', panelInk: '#F5EFE7', surface: '#FFFFFF', line: '#E3DBCF', serif: true, weight: 500,
