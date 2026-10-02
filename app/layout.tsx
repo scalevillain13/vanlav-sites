@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { preload } from 'react-dom';
 import './fonts';
 import './globals.css';
+import './sections.css';
 import YandexMetrika from '@/components/YandexMetrika';
 import { BRAND, HOME_DESCRIPTION, HOME_TITLE, KEYWORDS, SITE_URL } from '@/lib/seo';
 

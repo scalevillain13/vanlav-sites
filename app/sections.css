@@ -1,0 +1,161 @@
+/* ===== Новые секции: анатомия сайта, скорость, кадры из проектов, микро-эффекты ===== */
+
+/* ---------- Анатомия сайта (CSS 3D, привязка к скроллу) ---------- */
+.anat { position: relative; height: 430vh; margin-top: var(--sec-top); scroll-margin-top: 68px; --W: min(700px, 48vw); --gap: 120px; }
+.anat-sticky {
+  position: -webkit-sticky; position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  max-width: 1360px; margin: 0 auto; padding: 88px var(--pad-x) 32px;
+  display: grid; grid-template-columns: minmax(300px, 0.8fr) 1.2fr; gap: 40px; align-items: center;
+}
+.anat-copy { display: flex; flex-direction: column; gap: 22px; position: relative; z-index: 2; }
+.anat-copy .h2 { font-size: clamp(30px, 3.6vw, 52px); }
+.anat-steps { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.anat-steps li { border-bottom: 1px solid var(--line); padding: 14px 0; color: var(--muted); transition: color .35s; }
+.anat-steps li b { display: flex; align-items: baseline; gap: 14px; font-family: var(--head); font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.anat-steps li b span { font-size: 12px; font-weight: 500; color: inherit; min-width: 20px; }
+.anat-steps li p { margin: 0; max-height: 0; overflow: hidden; opacity: 0; font-size: 15px; line-height: 1.55; color: var(--text-2); max-width: 420px; transition: max-height .45s var(--ease), opacity .35s, margin .45s var(--ease); }
+.anat-steps li.done { color: var(--text-2); }
+.anat-steps li.on { color: var(--text); }
+.anat-steps li.on b span { color: var(--accent); }
+.anat-steps li.on p { max-height: 90px; opacity: 1; margin-top: 8px; }
+
+.anat-stage { position: relative; height: 100%; min-height: 0; perspective: 1900px; perspective-origin: 50% 40%; }
+.anat-rig {
+  --tilt: 0; --s: 0;
+  position: absolute; left: 50%; top: 50%; width: var(--W); aspect-ratio: 1894 / 1037; margin-left: calc(var(--W) / -2);
+  transform: translateY(-50%) rotateX(calc(var(--tilt) * 54deg)) rotateZ(calc(var(--tilt) * -34deg)) scale(calc(1 - var(--tilt) * .12));
+  transform-style: preserve-3d; will-change: transform;
+}
+.anat-layer {
+  position: absolute; inset: 0; border-radius: 10px; overflow: hidden;
+  transform: translateZ(calc((var(--i) - 1.5) * (3px + var(--gap) * var(--s))));
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .75);
+  transition: opacity .45s, filter .45s;
+}
+.anat-layer > svg, .anat-layer > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.anat-stage.split .anat-layer.dim { filter: brightness(.38) saturate(.4); }
+.anat-stage.split .L-wire.dim { filter: none; opacity: .35; }
+.L-wire { background: rgba(241, 238, 231, .035); outline: 1px solid var(--line-3); outline-offset: -1px; }
+.L-design { background: #F3F3EF; }
+.L-code { background: #141310; outline: 1px solid var(--line-2); outline-offset: -1px; }
+.L-content { background: #F3F3EF; }
+.anat-tag {
+  position: absolute; left: 3%; bottom: 5%; padding: .5em .9em; border-radius: 999px; font-size: calc(var(--W) * .021);
+  background: var(--accent); color: var(--bg); font-weight: 600; white-space: nowrap; opacity: var(--s);
+}
+.anat-code { margin: 0; height: 100%; padding: 5% 6%; font: 500 calc(var(--W) * .02)/1.6 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #D8D3C7; white-space: pre; overflow: hidden; }
+.anat-code i { font-style: normal; }
+.anat-code .k { color: #FF7843; } .anat-code .f { color: #F1C27D; } .anat-code .t { color: #7FB3D5; }
+.anat-code .a { color: #C3A6E0; } .anat-code .s { color: #A8D08D; } .anat-code .n { color: #F59E7A; } .anat-code .c { color: #8E8A80; }
+
+/* спутники: выдача, скорость, заявка */
+.anat-sat {
+  position: absolute; z-index: 3; display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 16px;
+  background: rgba(20, 20, 18, .92); border: 1px solid var(--line-2); box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .8);
+  opacity: 0; transform: translateY(18px) scale(.96); transition: opacity .5s var(--ease), transform .6s var(--ease); pointer-events: none;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.anat-sat.on { opacity: 1; transform: none; }
+.sat-seo { top: 8%; right: 0; max-width: 330px; flex-direction: column; align-items: flex-start; gap: 4px; background: #F1EEE7; border-color: transparent; color: #1A1916; }
+.sat-seo small { font-size: 12px; color: #4D6B47; }
+.sat-seo b { font-size: 16px; font-weight: 500; color: #2A4FB0; line-height: 1.3; }
+.sat-seo span { font-size: 13px; line-height: 1.45; color: #4A4840; }
+.sat-speed { bottom: 9%; left: 2%; transition-delay: .12s; }
+.sat-speed svg { width: 52px; height: 52px; transform: rotate(-90deg); flex: none; }
+.sat-speed circle { fill: none; stroke: var(--line-3); stroke-width: 4; }
+.sat-speed circle.v { stroke: #4FCB7E; stroke-dasharray: 119.4; stroke-dashoffset: 119.4; stroke-linecap: round; transition: stroke-dashoffset 1.2s var(--ease) .3s; }
+.sat-speed.on circle.v { stroke-dashoffset: 0; }
+.sat-speed b { display: block; font-family: var(--head); font-size: 22px; font-weight: 600; color: #4FCB7E; }
+.sat-speed small { font-size: 12px; color: var(--muted); }
+.sat-tg { top: 4%; left: 4%; }
+.sat-tg i { width: 38px; height: 38px; border-radius: 50%; background: #2AABEE; color: #fff; display: grid; place-items: center; flex: none; }
+.sat-tg b { display: block; font-size: 14px; font-weight: 600; }
+.sat-tg span { font-size: 13px; color: var(--muted); }
+
+.anat.still { height: auto; }
+.anat.still .anat-sticky { position: relative; height: auto; min-height: 640px; }
+.anat.still .anat-steps li p { max-height: none; opacity: 1; margin-top: 8px; }
+.anat.still .anat-stage { height: 520px; }
+
+@media (max-width: 899px) {
+  .anat { height: 380vh; --W: min(84vw, 520px); --gap: 64px; }
+  .anat-sticky { grid-template-columns: 1fr; grid-template-rows: 1fr auto; gap: 0; padding-top: 76px; padding-bottom: 20px; align-items: stretch; }
+  .anat-copy { gap: 12px; order: 2; }
+  .anat-copy .label { display: none; }
+  .anat-copy .h2 { font-size: 26px; }
+  .anat-steps { margin-top: 2px; }
+  .anat-steps li { display: none; padding: 12px 0 0; border: 0; }
+  .anat-steps li.on { display: block; }
+  .anat-steps li b { font-size: 18px; }
+  .anat-stage { order: 1; min-height: 300px; perspective: 1200px; }
+  .sat-seo { max-width: 205px; padding: 10px 12px; top: 2%; }
+  .sat-seo b { font-size: 13px; }
+  .sat-seo span { display: none; }
+  .sat-speed { bottom: auto; top: 2%; left: 0; padding: 8px 12px; }
+  .sat-speed small { display: none; }
+  .sat-speed svg { width: 40px; height: 40px; }
+  .sat-speed b { font-size: 18px; }
+  .sat-tg { top: auto; bottom: 4%; left: auto; right: 0; padding: 10px 12px; }
+  .sat-tg span { display: none; }
+  .anat.still .anat-steps li { display: block; }
+}
+
+/* ---------- Скорость (Lighthouse) ---------- */
+.speed-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 56px; background: var(--line); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+.gauge { background: var(--bg); padding: clamp(22px, 3vw, 40px); display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.gauge svg { width: clamp(96px, 10vw, 140px); height: auto; transform: rotate(-90deg); }
+.gauge circle { fill: none; stroke-width: 7; }
+.gauge .track { stroke: var(--surface-2); }
+.gauge .val { stroke: #4FCB7E; stroke-linecap: round; stroke-dasharray: 289; stroke-dashoffset: 289; transition: stroke-dashoffset 1.6s var(--ease); }
+.seen .gauge .val { stroke-dashoffset: 0; }
+.gauge-n { position: relative; }
+.gauge-n b { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--head); font-size: clamp(26px, 2.6vw, 38px); font-weight: 600; color: #4FCB7E; }
+.gauge > span { font-size: 15px; color: var(--text-2); line-height: 1.4; }
+.vitals { margin-top: 12px; padding: clamp(22px, 3vw, 40px); border: 1px solid var(--line); border-radius: 24px; display: flex; flex-direction: column; gap: 26px; }
+.vitals-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; font-size: 14px; color: var(--muted); }
+.vitals-head i { display: inline-block; width: 22px; height: 8px; border-radius: 4px; background: rgba(79, 203, 126, .18); vertical-align: middle; margin-right: 8px; }
+.vital { display: grid; grid-template-columns: minmax(150px, 220px) 1fr 72px; align-items: center; gap: 20px; }
+.vital > div:first-child b { display: block; font-size: 16px; font-weight: 600; }
+.vital > div:first-child small { font-size: 13px; color: var(--muted); }
+.vital-bar { position: relative; height: 12px; border-radius: 6px; background: var(--surface-2); }
+.vital-bar .ok { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: rgba(79, 203, 126, .18); }
+.vital-bar .ok::after { content: attr(data-l); position: absolute; right: 0; top: 18px; transform: translateX(50%); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.vital-bar .me { position: absolute; top: -5px; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: #4FCB7E; box-shadow: 0 0 0 5px rgba(79, 203, 126, .2); left: 0; transition: left 1.4s var(--ease) .2s; }
+.vital > b { font-family: var(--head); font-size: 20px; font-weight: 600; text-align: right; color: #4FCB7E; }
+.speed-note { margin-top: 18px; font-size: 13px; color: var(--muted); }
+@media (max-width: 899px) {
+  .speed-grid { grid-template-columns: repeat(2, 1fr); }
+  .vital { grid-template-columns: 1fr 64px; gap: 10px 14px; }
+  .vital-bar { grid-column: 1 / -1; grid-row: 2; margin-bottom: 18px; }
+}
+
+/* ---------- Кадры из проектов ---------- */
+.shots { margin-top: var(--sec-top); scroll-margin-top: 68px; }
+.shots-head { max-width: 1360px; margin: 0 auto; padding: 0 var(--pad-x); }
+.shots-track {
+  display: flex; gap: clamp(14px, 2vw, 24px); margin-top: 48px; padding: 10px var(--pad-x) 30px; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity; scroll-padding-inline: var(--pad-x); scrollbar-width: none; cursor: grab; touch-action: pan-x pan-y; perspective: 1400px;
+}
+.shots-track::-webkit-scrollbar { display: none; }
+.shots-track.drag { cursor: grabbing; scroll-snap-type: none; }
+.shot-card {
+  flex: none; scroll-snap-align: start; width: clamp(250px, 27vw, 380px); margin: 0; color: var(--text);
+  transform: rotateY(var(--ry, 0deg)); transform-origin: 50% 50%; transition: transform .25s ease-out;
+}
+.shot-card.tall { width: clamp(210px, 20vw, 290px); }
+.shot-frame { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--surface); }
+.shot-card.wide .shot-frame { aspect-ratio: 4 / 3; }
+.shot-frame img { position: absolute; left: -8%; top: 0; width: 116%; height: 100%; object-fit: cover; transform: translateX(var(--px, 0%)); will-change: transform; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+.shot-card figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: 14px; }
+.shot-card figcaption b { font-weight: 600; }
+.shot-card figcaption span { color: var(--muted); text-align: right; }
+.shots-foot { max-width: 1360px; margin: 0 auto; padding: 0 var(--pad-x); display: flex; align-items: center; gap: 16px; color: var(--muted); font-size: 14px; }
+.shots-bar { flex: 1; height: 2px; background: var(--line); position: relative; overflow: hidden; border-radius: 2px; }
+.shots-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+
+/* ---------- Микро-эффекты: подсветка карточек за курсором ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .card { --mx: -999px; --my: -999px; }
+  .card { background-image: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 90, 31, .09), transparent 60%); }
+  .btn-accent { will-change: transform; }
+}

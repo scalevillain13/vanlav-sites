@@ -29,12 +29,27 @@ export default function HomeEffects({ cursor = true }: { cursor?: boolean }) {
         const c = curRef.current; if (c) c.style.transform = `translate(${x}px,${y}px)`;
         craf = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? requestAnimationFrame(loop) : 0;
       };
+      // магнитные кнопки и подсветка карточек под курсором
+      const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let mag: HTMLElement | null = null;
+      const releaseMag = () => { if (mag) { mag.style.transform = ''; mag = null; } };
       onMouse = (e: MouseEvent) => {
         tx = e.clientX; ty = e.clientY;
         if (!craf) craf = requestAnimationFrame(loop);
+        const t = e.target as Element | null;
+        const card = t?.closest?.('.card') as HTMLElement | null;
+        if (card) { const r = card.getBoundingClientRect(); card.style.setProperty('--mx', e.clientX - r.left + 'px'); card.style.setProperty('--my', e.clientY - r.top + 'px'); }
+        if (!calm) {
+          const btn = t?.closest?.('.btn-accent') as HTMLElement | null;
+          if (btn !== mag) releaseMag();
+          if (btn) {
+            mag = btn;
+            const r = btn.getBoundingClientRect();
+            btn.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * 0.22).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * 0.3).toFixed(1)}px)`;
+          }
+        }
         const c = curRef.current; if (!c) return;
         c.style.opacity = '1';
-        const t = e.target as Element | null;
         const hot = t && t.closest && t.closest('a,button,select,input,textarea,[role=tab]');
         c.classList.toggle('hot', !!hot);
       };

@@ -14,6 +14,9 @@ import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 import HomeEffects from '@/components/HomeEffects';
 import Faq from '@/components/Faq';
+import Anatomy from '@/components/Anatomy';
+import Speed from '@/components/Speed';
+import Shots from '@/components/Shots';
 import JsonLd from '@/components/JsonLd';
 import { HOME_FAQ } from '@/lib/services-content';
 import { homeLd } from '@/lib/seo';
@@ -30,10 +33,13 @@ export default function Home() {
         <Author />
         <Showcase3D />
         <div data-reveal=""><Catalog /></div>
+        <Shots />
         <div data-reveal=""><Process /></div>
         <div data-reveal=""><Benefits /></div>
         <div data-reveal=""><Pricing /></div>
         <div data-reveal=""><CustomBlock /></div>
+        <Anatomy />
+        <Speed />
         <div data-reveal=""><Services /></div>
         <Automation />
         <div data-reveal=""><Faq items={HOME_FAQ} title="Частые вопросы о разработке сайтов" label="Вопросы и ответы" /></div>
